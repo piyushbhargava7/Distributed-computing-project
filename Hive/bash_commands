@@ -1,0 +1,32 @@
+hadoop fs -get s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/initialize.hqlhadoop fs -get s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/iterations.hql
+
+hadoop fs -cp s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-5E8CNM3H33OG/data /
+
+start="1"
+stop="4"
+i=0
+echo "Start time" $(date +"%T") >> current.txt
+hive -hiveconf start=$start -hiveconf stop=$stop -f initialize.hql
+while [[ $(hive -e "select node_1 from current1;") -ne $stop ]]; 
+do
+i=$((i + 1))
+echo "Start Iteration" $i >> current.txt
+echo $(date +"%T") >> current.txt
+echo $(hive -hiveconf start=$start -hiveconf stop=$stop -f iterations.hql) >> current.txt
+echo "End Iteration" $i >> current.txt
+echo $(date +"%T") >> current.txt
+done
+echo "End time" $(date +"%T") >> current.txt
+
+current=$stop
+echo $current >> final_path.txt
+while [[ current -ne $start ]]; 
+do
+current=$(hive -e "select node_from from came_from where node=$current;") 
+echo $current >> final_path.txt
+done
+
+
+hadoop fs -put final_path.txt s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/
+
+hadoop fs -put current.txt s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/

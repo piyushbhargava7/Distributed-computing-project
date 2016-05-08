@@ -1,0 +1,2629 @@
+
+Piyushs-MacBook-Pro:github piyushbhargava$ ssh -i ~/abc.pem hadoop@ec2-54-201-251-162.us-west-2.compute.amazonaws.com
+Last login: Wed May  4 08:10:36 2016 from c-24-23-133-57.hsd1.ca.comcast.net
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2015.09-release-notes/
+11 package(s) needed for security, out of 21 available
+Run "sudo yum update" to apply all updates.
+Amazon Linux version 2016.03 is available.
+                                                                    
+EEEEEEEEEEEEEEEEEEEE MMMMMMMM           MMMMMMMM RRRRRRRRRRRRRRR    
+E::::::::::::::::::E M:::::::M         M:::::::M R::::::::::::::R   
+EE:::::EEEEEEEEE:::E M::::::::M       M::::::::M R:::::RRRRRR:::::R 
+  E::::E       EEEEE M:::::::::M     M:::::::::M RR::::R      R::::R
+  E::::E             M::::::M:::M   M:::M::::::M   R:::R      R::::R
+  E:::::EEEEEEEEEE   M:::::M M:::M M:::M M:::::M   R:::RRRRRR:::::R 
+  E::::::::::::::E   M:::::M  M:::M:::M  M:::::M   R:::::::::::RR   
+  E:::::EEEEEEEEEE   M:::::M   M:::::M   M:::::M   R:::RRRRRR::::R  
+  E::::E             M:::::M    M:::M    M:::::M   R:::R      R::::R
+  E::::E       EEEEE M:::::M     MMM     M:::::M   R:::R      R::::R
+EE:::::EEEEEEEE::::E M:::::M             M:::::M   R:::R      R::::R
+E::::::::::::::::::E M:::::M             M:::::M RR::::R      R::::R
+EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
+                                                                    
+[hadoop@ip-172-31-30-118 ~]$ hadoop fs -get s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/iterations.hql
+16/05/05 06:43:47 INFO fs.EmrFileSystem: Consistency disabled, using com.amazon.ws.emr.hadoop.fs.s3n.S3NativeFileSystem as filesystem implementation
+16/05/05 06:43:48 INFO s3n.S3NativeFileSystem: Opening 's3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/iterations.hql' for reading
+[hadoop@ip-172-31-30-118 ~]$ hadoop fs -get s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/initialize.hql
+16/05/05 06:43:59 INFO fs.EmrFileSystem: Consistency disabled, using com.amazon.ws.emr.hadoop.fs.s3n.S3NativeFileSystem as filesystem implementation
+16/05/05 06:44:00 INFO s3n.S3NativeFileSystem: Opening 's3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/initialize.hql' for reading
+[hadoop@ip-172-31-30-118 ~]$ ls
+initialize.hql  iterations.hql  test.hql
+[hadoop@ip-172-31-30-118 ~]$ start="1"
+[hadoop@ip-172-31-30-118 ~]$ stop="4"
+[hadoop@ip-172-31-30-118 ~]$ i=0
+[hadoop@ip-172-31-30-118 ~]$ echo "Start time" $(date +"%T") >> current.txt
+[hadoop@ip-172-31-30-118 ~]$ hive -hiveconf start=$start -hiveconf stop=$stop -f initialize.hql
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.529 seconds
+OK
+Time taken: 0.187 seconds
+Loading data to table default.original
+Table default.original stats: [numFiles=1, numRows=0, totalSize=15851233, rawDataSize=0]
+OK
+Time taken: 0.595 seconds
+OK
+Time taken: 0.05 seconds
+OK
+Time taken: 0.026 seconds
+Loading data to table default.coordinates
+Table default.coordinates stats: [numFiles=1, numRows=0, totalSize=9205724, rawDataSize=0]
+OK
+Time taken: 0.111 seconds
+OK
+Time taken: 0.05 seconds
+OK
+Time taken: 0.03 seconds
+Warning: Map Join MAPJOIN[26][bigTable=?] in task 'Stage-3:MAPRED' is a cross product
+Query ID = hadoop_20160505064444_42c28f14-e677-4a09-8f01-4cf23759447c
+Total jobs = 2
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505064444_42c28f14-e677-4a09-8f01-4cf23759447c.log
+2016-05-05 06:44:28	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:44:30	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/0f331f68-f23d-4d51-8e05-5bff6b0f79cd/hive_2016-05-05_06-44-22_985_2982329886266024644-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 06:44:30	Uploaded 1 File to: file:/mnt/tmp/hadoop/0f331f68-f23d-4d51-8e05-5bff6b0f79cd/hive_2016-05-05_06-44-22_985_2982329886266024644-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (296 bytes)
+2016-05-05 06:44:30	End of local task; Time Taken: 2.0 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 2
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0144, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0144/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0144
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 06:44:37,485 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 06:44:44,757 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 3.2 sec
+MapReduce Total cumulative CPU time: 3 seconds 200 msec
+Ended Job = job_1462424513485_0144
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505064444_42c28f14-e677-4a09-8f01-4cf23759447c.log
+2016-05-05 06:44:50	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:44:52	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/0f331f68-f23d-4d51-8e05-5bff6b0f79cd/hive_2016-05-05_06-44-22_985_2982329886266024644-1/-local-10004/HashTable-Stage-3/MapJoin-mapfile01--.hashtable
+2016-05-05 06:44:52	Uploaded 1 File to: file:/mnt/tmp/hadoop/0f331f68-f23d-4d51-8e05-5bff6b0f79cd/hive_2016-05-05_06-44-22_985_2982329886266024644-1/-local-10004/HashTable-Stage-3/MapJoin-mapfile01--.hashtable (8928107 bytes)
+2016-05-05 06:44:52	End of local task; Time Taken: 2.251 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0145, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0145/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0145
+Hadoop job information for Stage-3: number of mappers: 1; number of reducers: 1
+2016-05-05 06:44:59,802 Stage-3 map = 0%,  reduce = 0%
+2016-05-05 06:45:07,045 Stage-3 map = 100%,  reduce = 0%, Cumulative CPU 3.42 sec
+2016-05-05 06:45:14,271 Stage-3 map = 100%,  reduce = 100%, Cumulative CPU 5.28 sec
+MapReduce Total cumulative CPU time: 5 seconds 280 msec
+Ended Job = job_1462424513485_0145
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 1   Cumulative CPU: 3.2 sec   HDFS Read: 15851484 HDFS Write: 166 SUCCESS
+Stage-Stage-3: Map: 1  Reduce: 1   Cumulative CPU: 5.28 sec   HDFS Read: 603 HDFS Write: 84 SUCCESS
+Total MapReduce CPU Time Spent: 8 seconds 480 msec
+OK
+Time taken: 52.478 seconds
+OK
+Time taken: 0.057 seconds
+OK
+Time taken: 0.026 seconds
+OK
+Time taken: 0.065 seconds
+OK
+Time taken: 0.027 seconds
+OK
+Time taken: 0.061 seconds
+OK
+Time taken: 0.026 seconds
+Query ID = hadoop_20160505064545_ea96294c-5ac2-4609-9e97-219c54b865e1
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0146, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0146/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0146
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 06:45:21,610 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 06:45:27,782 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.61 sec
+MapReduce Total cumulative CPU time: 1 seconds 610 msec
+Ended Job = job_1462424513485_0146
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/0f331f68-f23d-4d51-8e05-5bff6b0f79cd/hive_2016-05-05_06-45-15_731_3664318602691916162-1/-ext-10000
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.61 sec   HDFS Read: 259 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 610 msec
+OK
+Time taken: 13.203 seconds
+OK
+Time taken: 0.045 seconds
+OK
+Time taken: 0.023 seconds
+Query ID = hadoop_20160505064545_fd09e5bf-abf2-4570-99f6-3d25753195ed
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0147, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0147/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0147
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 06:45:34,449 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 06:45:40,621 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.11 sec
+2016-05-05 06:45:46,802 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.4 sec
+MapReduce Total cumulative CPU time: 2 seconds 400 msec
+Ended Job = job_1462424513485_0147
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.4 sec   HDFS Read: 259 HDFS Write: 88 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 400 msec
+OK
+Time taken: 18.957 seconds
+[hadoop@ip-172-31-30-118 ~]$ hadoop fs -cp s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-5E8CNM3H33OG/data /
+16/05/05 06:48:25 INFO fs.EmrFileSystem: Consistency disabled, using com.amazon.ws.emr.hadoop.fs.s3n.S3NativeFileSystem as filesystem implementation
+16/05/05 06:48:26 INFO s3n.S3NativeFileSystem: listStatus s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-5E8CNM3H33OG/data with recursive false
+16/05/05 06:48:26 INFO s3n.S3NativeFileSystem: Opening 's3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-5E8CNM3H33OG/data/bay_co.txt' for reading
+16/05/05 06:48:26 INFO s3n.S3NativeFileSystem: Opening 's3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-5E8CNM3H33OG/data/bay_dist.txt' for reading
+[hadoop@ip-172-31-30-118 ~]$ start="1"
+[hadoop@ip-172-31-30-118 ~]$ stop="4"
+[hadoop@ip-172-31-30-118 ~]$ i=0
+[hadoop@ip-172-31-30-118 ~]$ echo "Start time" $(date +"%T") >> current.txt
+[hadoop@ip-172-31-30-118 ~]$ hive -hiveconf start=$start -hiveconf stop=$stop -f initialize.hql
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.559 seconds
+OK
+Time taken: 0.193 seconds
+Loading data to table default.original
+Table default.original stats: [numFiles=1, numRows=0, totalSize=15851233, rawDataSize=0]
+OK
+Time taken: 0.584 seconds
+OK
+Time taken: 0.049 seconds
+OK
+Time taken: 0.033 seconds
+Loading data to table default.coordinates
+Table default.coordinates stats: [numFiles=1, numRows=0, totalSize=9205724, rawDataSize=0]
+OK
+Time taken: 0.109 seconds
+OK
+Time taken: 0.049 seconds
+OK
+Time taken: 0.025 seconds
+Warning: Map Join MAPJOIN[26][bigTable=?] in task 'Stage-3:MAPRED' is a cross product
+Query ID = hadoop_20160505064848_134d88f5-0f5c-43b3-8251-3d92e2615252
+Total jobs = 2
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505064848_134d88f5-0f5c-43b3-8251-3d92e2615252.log
+2016-05-05 06:48:46	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:48:48	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/12113c5c-8db3-405b-bdc3-eb92fc5fbf18/hive_2016-05-05_06-48-42_163_2083153946003553434-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 06:48:49	Uploaded 1 File to: file:/mnt/tmp/hadoop/12113c5c-8db3-405b-bdc3-eb92fc5fbf18/hive_2016-05-05_06-48-42_163_2083153946003553434-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (296 bytes)
+2016-05-05 06:48:49	End of local task; Time Taken: 2.034 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 2
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0149, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0149/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0149
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 06:48:55,983 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 06:49:03,262 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 3.07 sec
+MapReduce Total cumulative CPU time: 3 seconds 70 msec
+Ended Job = job_1462424513485_0149
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505064848_134d88f5-0f5c-43b3-8251-3d92e2615252.log
+2016-05-05 06:49:07	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:49:09	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/12113c5c-8db3-405b-bdc3-eb92fc5fbf18/hive_2016-05-05_06-48-42_163_2083153946003553434-1/-local-10004/HashTable-Stage-3/MapJoin-mapfile01--.hashtable
+2016-05-05 06:49:10	Uploaded 1 File to: file:/mnt/tmp/hadoop/12113c5c-8db3-405b-bdc3-eb92fc5fbf18/hive_2016-05-05_06-48-42_163_2083153946003553434-1/-local-10004/HashTable-Stage-3/MapJoin-mapfile01--.hashtable (8928107 bytes)
+2016-05-05 06:49:10	End of local task; Time Taken: 2.221 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0150, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0150/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0150
+Hadoop job information for Stage-3: number of mappers: 1; number of reducers: 1
+2016-05-05 06:49:17,042 Stage-3 map = 0%,  reduce = 0%
+2016-05-05 06:49:24,282 Stage-3 map = 100%,  reduce = 0%, Cumulative CPU 3.47 sec
+2016-05-05 06:49:31,499 Stage-3 map = 100%,  reduce = 100%, Cumulative CPU 5.29 sec
+MapReduce Total cumulative CPU time: 5 seconds 290 msec
+Ended Job = job_1462424513485_0150
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 1   Cumulative CPU: 3.07 sec   HDFS Read: 15851484 HDFS Write: 166 SUCCESS
+Stage-Stage-3: Map: 1  Reduce: 1   Cumulative CPU: 5.29 sec   HDFS Read: 603 HDFS Write: 84 SUCCESS
+Total MapReduce CPU Time Spent: 8 seconds 360 msec
+OK
+Time taken: 50.52 seconds
+OK
+Time taken: 0.049 seconds
+OK
+Time taken: 0.021 seconds
+OK
+Time taken: 0.047 seconds
+OK
+Time taken: 0.019 seconds
+OK
+Time taken: 0.045 seconds
+OK
+Time taken: 0.027 seconds
+Query ID = hadoop_20160505064949_4eaa640d-2ec0-4cb7-a245-9a0ed1d55e8e
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0151, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0151/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0151
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 06:49:38,342 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 06:49:44,522 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.53 sec
+MapReduce Total cumulative CPU time: 1 seconds 530 msec
+Ended Job = job_1462424513485_0151
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/12113c5c-8db3-405b-bdc3-eb92fc5fbf18/hive_2016-05-05_06-49-32_900_8158577759628902870-1/-ext-10000
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.53 sec   HDFS Read: 259 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 530 msec
+OK
+Time taken: 12.78 seconds
+OK
+Time taken: 0.048 seconds
+OK
+Time taken: 0.02 seconds
+Query ID = hadoop_20160505064949_51b72b9a-390f-46ee-94aa-8b04e9d50507
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0152, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0152/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0152
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 06:49:51,179 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 06:49:57,344 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.12 sec
+2016-05-05 06:50:04,550 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.41 sec
+MapReduce Total cumulative CPU time: 2 seconds 410 msec
+Ended Job = job_1462424513485_0152
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.41 sec   HDFS Read: 259 HDFS Write: 88 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 410 msec
+OK
+Time taken: 19.952 seconds
+[hadoop@ip-172-31-30-118 ~]$ while [[ $(hive -e "select node_1 from current1;") -ne $stop ]]; 
+> do
+> i=$((i + 1))
+> echo "Start Iteration" $i >> current.txt
+> echo $(date +"%T") >> current.txt
+> echo $(hive -hiveconf start=$start -hiveconf stop=$stop -f iterations.hql) >> current.txt
+> echo "End Iteration" $i >> current.txt
+> echo $(date +"%T") >> current.txt
+> done
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.883 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.233 seconds, Fetched: 1 row(s)
+Warning: Map Join MAPJOIN[60][bigTable=a] in task 'Stage-8:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[16][tables = [a, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505065555_9924dd0d-5b40-41db-b06e-79188aad5ada
+Total jobs = 4
+Launching Job 1 out of 4
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0153, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0153/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0153
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 06:55:25,902 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 06:55:32,164 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.45 sec
+2016-05-05 06:55:39,430 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.26 sec
+MapReduce Total cumulative CPU time: 3 seconds 260 msec
+Ended Job = job_1462424513485_0153
+Stage-11 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065555_9924dd0d-5b40-41db-b06e-79188aad5ada.log
+2016-05-05 06:55:43	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:55:45	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-55-19_112_6439791146052545838-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 06:55:45	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-55-19_112_6439791146052545838-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (276 bytes)
+2016-05-05 06:55:45	End of local task; Time Taken: 1.121 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0154, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0154/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0154
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 06:55:51,326 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 06:55:57,556 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.31 sec
+MapReduce Total cumulative CPU time: 1 seconds 310 msec
+Ended Job = job_1462424513485_0154
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065555_9924dd0d-5b40-41db-b06e-79188aad5ada.log
+2016-05-05 06:56:02	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:56:03	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-55-19_112_6439791146052545838-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable
+2016-05-05 06:56:03	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-55-19_112_6439791146052545838-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable (279 bytes)
+2016-05-05 06:56:03	End of local task; Time Taken: 1.2 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 4 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0155, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0155/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0155
+Hadoop job information for Stage-7: number of mappers: 1; number of reducers: 0
+2016-05-05 06:56:09,716 Stage-7 map = 0%,  reduce = 0%
+2016-05-05 06:56:15,884 Stage-7 map = 100%,  reduce = 0%, Cumulative CPU 1.66 sec
+MapReduce Total cumulative CPU time: 1 seconds 660 msec
+Ended Job = job_1462424513485_0155
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=0, totalSize=0, rawDataSize=0]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.26 sec   HDFS Read: 263 HDFS Write: 114 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.31 sec   HDFS Read: 259 HDFS Write: 123 SUCCESS
+Stage-Stage-7: Map: 1   Cumulative CPU: 1.66 sec   HDFS Read: 560 HDFS Write: 38 SUCCESS
+Total MapReduce CPU Time Spent: 6 seconds 230 msec
+OK
+Time taken: 57.938 seconds
+Query ID = hadoop_20160505065656_95dba2d5-46f0-4e38-88b8-7a7399646cef
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0156, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0156/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0156
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 06:56:21,714 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 06:56:27,884 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.27 sec
+MapReduce Total cumulative CPU time: 1 seconds 270 msec
+Ended Job = job_1462424513485_0156
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-17_052_9165585695047881229-1/-ext-10000
+Loading data to table default.closed
+Table default.closed stats: [numFiles=1, numRows=1, totalSize=16, rawDataSize=15]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.27 sec   HDFS Read: 263 HDFS Write: 86 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 270 msec
+OK
+Time taken: 11.985 seconds
+Warning: Map Join MAPJOIN[75][bigTable=?] in task 'Stage-9:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[21][tables = [a, original, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505065656_5e0f7051-f360-42aa-88d6-a21332e99093
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0157, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0157/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0157
+Hadoop job information for Stage-6: number of mappers: 1; number of reducers: 1
+2016-05-05 06:56:34,795 Stage-6 map = 0%,  reduce = 0%
+2016-05-05 06:56:40,977 Stage-6 map = 100%,  reduce = 0%, Cumulative CPU 1.41 sec
+2016-05-05 06:56:47,153 Stage-6 map = 100%,  reduce = 100%, Cumulative CPU 3.13 sec
+MapReduce Total cumulative CPU time: 3 seconds 130 msec
+Ended Job = job_1462424513485_0157
+Stage-15 is selected by condition resolver.
+Stage-1 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065656_5e0f7051-f360-42aa-88d6-a21332e99093.log
+2016-05-05 06:56:51	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:56:53	Processing rows:	200000	Hashtable size:	199999	Memory usage:	274280216	percentage:	0.294
+2016-05-05 06:56:54	Processing rows:	300000	Hashtable size:	299999	Memory usage:	208096720	percentage:	0.223
+2016-05-05 06:56:54	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-29_039_3724703754169726858-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable
+2016-05-05 06:56:54	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-29_039_3724703754169726858-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable (18083774 bytes)
+2016-05-05 06:56:54	End of local task; Time Taken: 3.127 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0158, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0158/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0158
+Hadoop job information for Stage-11: number of mappers: 1; number of reducers: 0
+2016-05-05 06:57:02,734 Stage-11 map = 0%,  reduce = 0%
+2016-05-05 06:57:09,928 Stage-11 map = 100%,  reduce = 0%, Cumulative CPU 2.22 sec
+MapReduce Total cumulative CPU time: 2 seconds 220 msec
+Ended Job = job_1462424513485_0158
+Stage-14 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065656_5e0f7051-f360-42aa-88d6-a21332e99093.log
+2016-05-05 06:57:14	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:57:15	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-29_039_3724703754169726858-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable
+2016-05-05 06:57:15	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-29_039_3724703754169726858-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable (276 bytes)
+2016-05-05 06:57:15	End of local task; Time Taken: 1.183 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0159, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0159/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0159
+Hadoop job information for Stage-9: number of mappers: 1; number of reducers: 0
+2016-05-05 06:57:21,841 Stage-9 map = 0%,  reduce = 0%
+2016-05-05 06:57:28,005 Stage-9 map = 100%,  reduce = 0%, Cumulative CPU 1.02 sec
+MapReduce Total cumulative CPU time: 1 seconds 20 msec
+Ended Job = job_1462424513485_0159
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065656_5e0f7051-f360-42aa-88d6-a21332e99093.log
+2016-05-05 06:57:32	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:57:33	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-29_039_3724703754169726858-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable
+2016-05-05 06:57:33	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-56-29_039_3724703754169726858-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable (279 bytes)
+2016-05-05 06:57:33	End of local task; Time Taken: 1.177 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0160, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0160/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0160
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 06:57:40,478 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 06:57:47,663 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.76 sec
+MapReduce Total cumulative CPU time: 1 seconds 760 msec
+Ended Job = job_1462424513485_0160
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=2, totalSize=40, rawDataSize=38]
+MapReduce Jobs Launched: 
+Stage-Stage-6: Map: 1  Reduce: 1   Cumulative CPU: 3.13 sec   HDFS Read: 261 HDFS Write: 114 SUCCESS
+Stage-Stage-11: Map: 1   Cumulative CPU: 2.22 sec   HDFS Read: 263 HDFS Write: 158 SUCCESS
+Stage-Stage-9: Map: 1   Cumulative CPU: 1.02 sec   HDFS Read: 595 HDFS Write: 158 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.76 sec   HDFS Read: 595 HDFS Write: 115 SUCCESS
+Total MapReduce CPU Time Spent: 8 seconds 130 msec
+OK
+Time taken: 79.783 seconds
+Warning: Map Join MAPJOIN[207][bigTable=?] in task 'Stage-15:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[44][tables = [current1, o, sq_1_notin_nullcheck]] in Stage 'Stage-6:MAPRED' is a cross product
+Query ID = hadoop_20160505065757_81f5efee-14fe-48a8-b34b-2bfa005e411a
+Total jobs = 7
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065757_81f5efee-14fe-48a8-b34b-2bfa005e411a.log
+2016-05-05 06:57:52	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:57:53	Dump the side-table for tag: 1 with group count: 0 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile71--.hashtable
+2016-05-05 06:57:53	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile71--.hashtable (260 bytes)
+2016-05-05 06:57:53	End of local task; Time Taken: 1.019 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065757_81f5efee-14fe-48a8-b34b-2bfa005e411a.log
+2016-05-05 06:57:58	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:58:00	Dump the side-table for tag: 0 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable
+2016-05-05 06:58:00	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable (279 bytes)
+2016-05-05 06:58:00	End of local task; Time Taken: 1.474 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065757_81f5efee-14fe-48a8-b34b-2bfa005e411a.log
+2016-05-05 06:58:04	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:58:05	Dump the side-table for tag: 1 with group count: 0 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile91--.hashtable
+2016-05-05 06:58:05	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile91--.hashtable (260 bytes)
+2016-05-05 06:58:05	End of local task; Time Taken: 1.056 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 7
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0161, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0161/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0161
+Hadoop job information for Stage-5: number of mappers: 2; number of reducers: 1
+2016-05-05 06:58:13,124 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 06:58:20,382 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 3.74 sec
+2016-05-05 06:58:27,580 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 5.54 sec
+MapReduce Total cumulative CPU time: 5 seconds 540 msec
+Ended Job = job_1462424513485_0161
+Launching Job 2 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0162, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0162/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0162
+Hadoop job information for Stage-18: number of mappers: 1; number of reducers: 0
+2016-05-05 06:58:34,013 Stage-18 map = 0%,  reduce = 0%
+2016-05-05 06:58:41,211 Stage-18 map = 100%,  reduce = 0%, Cumulative CPU 2.65 sec
+MapReduce Total cumulative CPU time: 2 seconds 650 msec
+Ended Job = job_1462424513485_0162
+Launching Job 3 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0163, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0163/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0163
+Hadoop job information for Stage-19: number of mappers: 1; number of reducers: 0
+2016-05-05 06:58:48,040 Stage-19 map = 0%,  reduce = 0%
+2016-05-05 06:58:54,205 Stage-19 map = 100%,  reduce = 0%, Cumulative CPU 1.75 sec
+MapReduce Total cumulative CPU time: 1 seconds 750 msec
+Ended Job = job_1462424513485_0163
+Stage-21 is selected by condition resolver.
+Stage-6 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065757_81f5efee-14fe-48a8-b34b-2bfa005e411a.log
+2016-05-05 06:58:59	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:59:01	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable
+2016-05-05 06:59:01	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable (276 bytes)
+2016-05-05 06:59:01	End of local task; Time Taken: 1.476 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0164, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0164/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0164
+Hadoop job information for Stage-15: number of mappers: 1; number of reducers: 0
+2016-05-05 06:59:07,539 Stage-15 map = 0%,  reduce = 0%
+2016-05-05 06:59:13,695 Stage-15 map = 100%,  reduce = 0%, Cumulative CPU 1.22 sec
+MapReduce Total cumulative CPU time: 1 seconds 220 msec
+Ended Job = job_1462424513485_0164
+Stage-20 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065757_81f5efee-14fe-48a8-b34b-2bfa005e411a.log
+2016-05-05 06:59:18	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:59:19	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable
+2016-05-05 06:59:19	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-57-48_828_4184883800647553041-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable (279 bytes)
+2016-05-05 06:59:19	End of local task; Time Taken: 1.232 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 7 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0165, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0165/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0165
+Hadoop job information for Stage-13: number of mappers: 1; number of reducers: 0
+2016-05-05 06:59:26,052 Stage-13 map = 0%,  reduce = 0%
+2016-05-05 06:59:32,209 Stage-13 map = 100%,  reduce = 0%, Cumulative CPU 1.77 sec
+MapReduce Total cumulative CPU time: 1 seconds 770 msec
+Ended Job = job_1462424513485_0165
+Loading data to table default.came_from
+Table default.came_from stats: [numFiles=1, numRows=2, totalSize=10, rawDataSize=8]
+MapReduce Jobs Launched: 
+Stage-Stage-5: Map: 2  Reduce: 1   Cumulative CPU: 5.54 sec   HDFS Read: 551 HDFS Write: 114 SUCCESS
+Stage-Stage-18: Map: 1   Cumulative CPU: 2.65 sec   HDFS Read: 15851484 HDFS Write: 140 SUCCESS
+Stage-Stage-19: Map: 1   Cumulative CPU: 1.75 sec   HDFS Read: 290 HDFS Write: 96 SUCCESS
+Stage-Stage-15: Map: 1   Cumulative CPU: 1.22 sec   HDFS Read: 577 HDFS Write: 140 SUCCESS
+Stage-Stage-13: Map: 1   Cumulative CPU: 1.77 sec   HDFS Read: 577 HDFS Write: 83 SUCCESS
+Total MapReduce CPU Time Spent: 12 seconds 930 msec
+OK
+Time taken: 104.517 seconds
+Warning: Map Join MAPJOIN[138][bigTable=?] in task 'Stage-14:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[40][tables = [a, b, c, sq_1_notin_nullcheck]] in Stage 'Stage-3:MAPRED' is a cross product
+Warning: Map Join MAPJOIN[139][bigTable=?] in task 'Stage-16:MAPRED' is a cross product
+Query ID = hadoop_20160505065959_64a97dd0-9cdb-4aab-ba4c-ce4b5b381346
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0166, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0166/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0166
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 1
+2016-05-05 06:59:39,652 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 06:59:45,815 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.42 sec
+2016-05-05 06:59:53,009 Stage-8 map = 100%,  reduce = 100%, Cumulative CPU 3.16 sec
+MapReduce Total cumulative CPU time: 3 seconds 160 msec
+Ended Job = job_1462424513485_0166
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065959_64a97dd0-9cdb-4aab-ba4c-ce4b5b381346.log
+2016-05-05 06:59:57	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 06:59:59	Processing rows:	200000	Hashtable size:	199997	Memory usage:	256551520	percentage:	0.275
+2016-05-05 06:59:59	Processing rows:	300000	Hashtable size:	299997	Memory usage:	132551560	percentage:	0.142
+2016-05-05 06:59:59	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable
+2016-05-05 07:00:00	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable (13124998 bytes)
+2016-05-05 07:00:00	Dump the side-table for tag: 2 with group count: 2 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable
+2016-05-05 07:00:00	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable (310 bytes)
+2016-05-05 07:00:00	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable
+2016-05-05 07:00:00	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable (279 bytes)
+2016-05-05 07:00:00	End of local task; Time Taken: 2.67 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0167, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0167/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0167
+Hadoop job information for Stage-17: number of mappers: 1; number of reducers: 0
+2016-05-05 07:00:07,113 Stage-17 map = 0%,  reduce = 0%
+2016-05-05 07:00:14,310 Stage-17 map = 100%,  reduce = 0%, Cumulative CPU 3.28 sec
+MapReduce Total cumulative CPU time: 3 seconds 280 msec
+Ended Job = job_1462424513485_0167
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065959_64a97dd0-9cdb-4aab-ba4c-ce4b5b381346.log
+2016-05-05 07:00:19	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:00:21	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable
+2016-05-05 07:00:22	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable (8928107 bytes)
+2016-05-05 07:00:22	End of local task; Time Taken: 2.243 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0168, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0168/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0168
+Hadoop job information for Stage-16: number of mappers: 1; number of reducers: 0
+2016-05-05 07:00:29,094 Stage-16 map = 0%,  reduce = 0%
+2016-05-05 07:00:36,281 Stage-16 map = 100%,  reduce = 0%, Cumulative CPU 3.36 sec
+MapReduce Total cumulative CPU time: 3 seconds 360 msec
+Ended Job = job_1462424513485_0168
+Stage-20 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065959_64a97dd0-9cdb-4aab-ba4c-ce4b5b381346.log
+2016-05-05 07:00:41	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:00:43	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable
+2016-05-05 07:00:43	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable (276 bytes)
+2016-05-05 07:00:43	End of local task; Time Taken: 1.127 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0169, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0169/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0169
+Hadoop job information for Stage-14: number of mappers: 1; number of reducers: 0
+2016-05-05 07:00:49,689 Stage-14 map = 0%,  reduce = 0%
+2016-05-05 07:00:55,847 Stage-14 map = 100%,  reduce = 0%, Cumulative CPU 1.39 sec
+MapReduce Total cumulative CPU time: 1 seconds 390 msec
+Ended Job = job_1462424513485_0169
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505065959_64a97dd0-9cdb-4aab-ba4c-ce4b5b381346.log
+2016-05-05 07:01:00	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:01:01	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable
+2016-05-05 07:01:01	Uploaded 1 File to: file:/mnt/tmp/hadoop/fd1e00e0-c26b-4c1a-957b-c0742d3492f8/hive_2016-05-05_06-59-33_350_4053282524115280414-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable (279 bytes)
+2016-05-05 07:01:01	End of local task; Time Taken: 1.155 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0170, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0170/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0170
+Hadoop job information for Stage-5: number of mappers: 1; number of reducers: 1
+2016-05-05 07:01:08,160 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:01:14,318 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 1.63 sec
+2016-05-05 07:01:21,505 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 3.5 sec
+MapReduce Total cumulative CPU time: 3 seconds 500 msec
+Ended Job = job_1462424513485_0170
+Loading data to table default.open
+Table default.open stats: [numFiles=2, numRows=2, totalSize=40, rawDataSize=38]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 1  Reduce: 1   Cumulative CPU: 3.16 sec   HDFS Read: 261 HDFS Write: 114 SUCCESS
+Stage-Stage-17: Map: 1   Cumulative CPU: 3.28 sec   HDFS Read: 15851484 HDFS Write: 176 SUCCESS
+Stage-Stage-16: Map: 1   Cumulative CPU: 3.36 sec   HDFS Read: 613 HDFS Write: 212 SUCCESS
+Stage-Stage-14: Map: 1   Cumulative CPU: 1.39 sec   HDFS Read: 649 HDFS Write: 208 SUCCESS
+Stage-Stage-5: Map: 1  Reduce: 1   Cumulative CPU: 3.5 sec   HDFS Read: 645 HDFS Write: 108 SUCCESS
+Total MapReduce CPU Time Spent: 14 seconds 690 msec
+OK
+Time taken: 109.297 seconds
+Query ID = hadoop_20160505070101_80224b81-af6f-41b8-9b67-f1ef62782648
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0171, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0171/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0171
+Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+2016-05-05 07:01:29,310 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:01:37,509 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.84 sec
+2016-05-05 07:01:44,695 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.65 sec
+MapReduce Total cumulative CPU time: 4 seconds 650 msec
+Ended Job = job_1462424513485_0171
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=2, totalSize=40, rawDataSize=38]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 2  Reduce: 1   Cumulative CPU: 4.65 sec   HDFS Read: 533 HDFS Write: 108 SUCCESS
+Total MapReduce CPU Time Spent: 4 seconds 650 msec
+OK
+Time taken: 23.182 seconds
+Query ID = hadoop_20160505070101_486c3c35-fdb1-4d5f-89b8-e80cfecba2cc
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0172, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0172/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0172
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:01:52,420 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:01:58,574 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.09 sec
+2016-05-05 07:02:04,756 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.4 sec
+MapReduce Total cumulative CPU time: 2 seconds 400 msec
+Ended Job = job_1462424513485_0172
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=19, rawDataSize=18]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.4 sec   HDFS Read: 283 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 400 msec
+OK
+Time taken: 20.095 seconds
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.881 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.225 seconds, Fetched: 1 row(s)
+Warning: Map Join MAPJOIN[60][bigTable=a] in task 'Stage-8:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[16][tables = [a, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505070202_fc3d9d8a-16b3-4dcd-a8c3-c680580cf301
+Total jobs = 4
+Launching Job 1 out of 4
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0173, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0173/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0173
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:02:23,678 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:02:29,941 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.41 sec
+2016-05-05 07:02:36,176 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.24 sec
+MapReduce Total cumulative CPU time: 3 seconds 240 msec
+Ended Job = job_1462424513485_0173
+Stage-11 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070202_fc3d9d8a-16b3-4dcd-a8c3-c680580cf301.log
+2016-05-05 07:02:40	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:02:41	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-02-16_801_4846784010912282770-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 07:02:41	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-02-16_801_4846784010912282770-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (276 bytes)
+2016-05-05 07:02:41	End of local task; Time Taken: 1.152 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0174, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0174/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0174
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:02:48,230 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:02:54,426 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.28 sec
+MapReduce Total cumulative CPU time: 1 seconds 280 msec
+Ended Job = job_1462424513485_0174
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070202_fc3d9d8a-16b3-4dcd-a8c3-c680580cf301.log
+2016-05-05 07:02:58	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:03:00	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-02-16_801_4846784010912282770-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable
+2016-05-05 07:03:00	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-02-16_801_4846784010912282770-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable (279 bytes)
+2016-05-05 07:03:00	End of local task; Time Taken: 1.168 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 4 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0175, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0175/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0175
+Hadoop job information for Stage-7: number of mappers: 1; number of reducers: 0
+2016-05-05 07:03:06,410 Stage-7 map = 0%,  reduce = 0%
+2016-05-05 07:03:12,603 Stage-7 map = 100%,  reduce = 0%, Cumulative CPU 1.8 sec
+MapReduce Total cumulative CPU time: 1 seconds 800 msec
+Ended Job = job_1462424513485_0175
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=1, totalSize=21, rawDataSize=20]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.24 sec   HDFS Read: 266 HDFS Write: 114 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.28 sec   HDFS Read: 283 HDFS Write: 152 SUCCESS
+Stage-Stage-7: Map: 1   Cumulative CPU: 1.8 sec   HDFS Read: 589 HDFS Write: 89 SUCCESS
+Total MapReduce CPU Time Spent: 6 seconds 320 msec
+OK
+Time taken: 56.978 seconds
+Query ID = hadoop_20160505070303_e7b0a07f-025f-4803-9c7d-d1291778fe56
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0176, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0176/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0176
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 07:03:19,633 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:03:25,800 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.25 sec
+MapReduce Total cumulative CPU time: 1 seconds 250 msec
+Ended Job = job_1462424513485_0176
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-13_782_2339220266139527495-1/-ext-10000
+Loading data to table default.closed
+Table default.closed stats: [numFiles=2, numRows=2, totalSize=35, rawDataSize=33]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.25 sec   HDFS Read: 266 HDFS Write: 89 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 250 msec
+OK
+Time taken: 13.206 seconds
+Warning: Map Join MAPJOIN[75][bigTable=?] in task 'Stage-9:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[21][tables = [a, original, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505070303_6704d374-f713-4c09-8168-8fbbbad90796
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0177, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0177/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0177
+Hadoop job information for Stage-6: number of mappers: 1; number of reducers: 1
+2016-05-05 07:03:33,624 Stage-6 map = 0%,  reduce = 0%
+2016-05-05 07:03:39,806 Stage-6 map = 100%,  reduce = 0%, Cumulative CPU 1.42 sec
+2016-05-05 07:03:47,013 Stage-6 map = 100%,  reduce = 100%, Cumulative CPU 3.17 sec
+MapReduce Total cumulative CPU time: 3 seconds 170 msec
+Ended Job = job_1462424513485_0177
+Stage-15 is selected by condition resolver.
+Stage-1 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070303_6704d374-f713-4c09-8168-8fbbbad90796.log
+2016-05-05 07:03:51	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:03:53	Processing rows:	200000	Hashtable size:	199999	Memory usage:	274345344	percentage:	0.294
+2016-05-05 07:03:53	Processing rows:	300000	Hashtable size:	299999	Memory usage:	212862720	percentage:	0.228
+2016-05-05 07:03:53	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-26_989_4550058387597311730-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable
+2016-05-05 07:03:54	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-26_989_4550058387597311730-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable (18083774 bytes)
+2016-05-05 07:03:54	End of local task; Time Taken: 2.772 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0178, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0178/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0178
+Hadoop job information for Stage-11: number of mappers: 1; number of reducers: 0
+2016-05-05 07:04:02,457 Stage-11 map = 0%,  reduce = 0%
+2016-05-05 07:04:09,653 Stage-11 map = 100%,  reduce = 0%, Cumulative CPU 2.42 sec
+MapReduce Total cumulative CPU time: 2 seconds 420 msec
+Ended Job = job_1462424513485_0178
+Stage-14 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070303_6704d374-f713-4c09-8168-8fbbbad90796.log
+2016-05-05 07:04:14	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:04:16	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-26_989_4550058387597311730-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable
+2016-05-05 07:04:16	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-26_989_4550058387597311730-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable (276 bytes)
+2016-05-05 07:04:16	End of local task; Time Taken: 1.291 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0179, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0179/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0179
+Hadoop job information for Stage-9: number of mappers: 1; number of reducers: 0
+2016-05-05 07:04:22,217 Stage-9 map = 0%,  reduce = 0%
+2016-05-05 07:04:27,377 Stage-9 map = 100%,  reduce = 0%, Cumulative CPU 1.03 sec
+MapReduce Total cumulative CPU time: 1 seconds 30 msec
+Ended Job = job_1462424513485_0179
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070303_6704d374-f713-4c09-8168-8fbbbad90796.log
+2016-05-05 07:04:32	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:04:33	Dump the side-table for tag: 1 with group count: 2 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-26_989_4550058387597311730-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable
+2016-05-05 07:04:34	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-03-26_989_4550058387597311730-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable (298 bytes)
+2016-05-05 07:04:34	End of local task; Time Taken: 1.136 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0180, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0180/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0180
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:04:40,420 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:04:46,583 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.68 sec
+MapReduce Total cumulative CPU time: 1 seconds 680 msec
+Ended Job = job_1462424513485_0180
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=0, totalSize=0, rawDataSize=0]
+MapReduce Jobs Launched: 
+Stage-Stage-6: Map: 1  Reduce: 1   Cumulative CPU: 3.17 sec   HDFS Read: 395 HDFS Write: 114 SUCCESS
+Stage-Stage-11: Map: 1   Cumulative CPU: 2.42 sec   HDFS Read: 266 HDFS Write: 126 SUCCESS
+Stage-Stage-9: Map: 1   Cumulative CPU: 1.03 sec   HDFS Read: 563 HDFS Write: 126 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.68 sec   HDFS Read: 563 HDFS Write: 45 SUCCESS
+Total MapReduce CPU Time Spent: 8 seconds 300 msec
+OK
+Time taken: 80.752 seconds
+Warning: Map Join MAPJOIN[207][bigTable=?] in task 'Stage-15:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[44][tables = [current1, o, sq_1_notin_nullcheck]] in Stage 'Stage-6:MAPRED' is a cross product
+Query ID = hadoop_20160505070404_a1825a88-9283-40a2-9959-a3f0ca3a6437
+Total jobs = 7
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070404_a1825a88-9283-40a2-9959-a3f0ca3a6437.log
+2016-05-05 07:04:51	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:04:52	Dump the side-table for tag: 0 with group count: 0 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile70--.hashtable
+2016-05-05 07:04:52	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile70--.hashtable (260 bytes)
+2016-05-05 07:04:52	End of local task; Time Taken: 1.02 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070404_a1825a88-9283-40a2-9959-a3f0ca3a6437.log
+2016-05-05 07:04:56	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:04:58	Dump the side-table for tag: 0 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable
+2016-05-05 07:04:58	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable (279 bytes)
+2016-05-05 07:04:58	End of local task; Time Taken: 1.488 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070404_a1825a88-9283-40a2-9959-a3f0ca3a6437.log
+2016-05-05 07:05:02	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:05:03	Dump the side-table for tag: 0 with group count: 0 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile90--.hashtable
+2016-05-05 07:05:03	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile90--.hashtable (260 bytes)
+2016-05-05 07:05:03	End of local task; Time Taken: 1.043 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 7
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0181, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0181/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0181
+Hadoop job information for Stage-5: number of mappers: 2; number of reducers: 1
+2016-05-05 07:05:10,174 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:05:18,424 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 3.65 sec
+2016-05-05 07:05:24,597 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 5.48 sec
+MapReduce Total cumulative CPU time: 5 seconds 480 msec
+Ended Job = job_1462424513485_0181
+Launching Job 2 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0182, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0182/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0182
+Hadoop job information for Stage-18: number of mappers: 1; number of reducers: 0
+2016-05-05 07:05:31,007 Stage-18 map = 0%,  reduce = 0%
+2016-05-05 07:05:38,206 Stage-18 map = 100%,  reduce = 0%, Cumulative CPU 2.59 sec
+MapReduce Total cumulative CPU time: 2 seconds 590 msec
+Ended Job = job_1462424513485_0182
+Launching Job 3 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0183, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0183/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0183
+Hadoop job information for Stage-19: number of mappers: 1; number of reducers: 0
+2016-05-05 07:05:45,060 Stage-19 map = 0%,  reduce = 0%
+2016-05-05 07:05:52,255 Stage-19 map = 100%,  reduce = 0%, Cumulative CPU 1.54 sec
+MapReduce Total cumulative CPU time: 1 seconds 540 msec
+Ended Job = job_1462424513485_0183
+Stage-21 is selected by condition resolver.
+Stage-6 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070404_a1825a88-9283-40a2-9959-a3f0ca3a6437.log
+2016-05-05 07:05:56	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:05:57	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable
+2016-05-05 07:05:57	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable (276 bytes)
+2016-05-05 07:05:57	End of local task; Time Taken: 1.159 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0184, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0184/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0184
+Hadoop job information for Stage-15: number of mappers: 1; number of reducers: 0
+2016-05-05 07:06:04,552 Stage-15 map = 0%,  reduce = 0%
+2016-05-05 07:06:10,711 Stage-15 map = 100%,  reduce = 0%, Cumulative CPU 1.21 sec
+MapReduce Total cumulative CPU time: 1 seconds 210 msec
+Ended Job = job_1462424513485_0184
+Stage-20 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070404_a1825a88-9283-40a2-9959-a3f0ca3a6437.log
+2016-05-05 07:06:15	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:06:16	Dump the side-table for tag: 1 with group count: 2 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable
+2016-05-05 07:06:16	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-04-47_747_1809185551300161446-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable (298 bytes)
+2016-05-05 07:06:16	End of local task; Time Taken: 1.203 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 7 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0185, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0185/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0185
+Hadoop job information for Stage-13: number of mappers: 1; number of reducers: 0
+2016-05-05 07:06:22,664 Stage-13 map = 0%,  reduce = 0%
+2016-05-05 07:06:28,822 Stage-13 map = 100%,  reduce = 0%, Cumulative CPU 1.7 sec
+MapReduce Total cumulative CPU time: 1 seconds 700 msec
+Ended Job = job_1462424513485_0185
+Loading data to table default.came_from
+Table default.came_from stats: [numFiles=2, numRows=2, totalSize=10, rawDataSize=8]
+MapReduce Jobs Launched: 
+Stage-Stage-5: Map: 2  Reduce: 1   Cumulative CPU: 5.48 sec   HDFS Read: 659 HDFS Write: 114 SUCCESS
+Stage-Stage-18: Map: 1   Cumulative CPU: 2.59 sec   HDFS Read: 15851484 HDFS Write: 117 SUCCESS
+Stage-Stage-19: Map: 1   Cumulative CPU: 1.54 sec   HDFS Read: 264 HDFS Write: 96 SUCCESS
+Stage-Stage-15: Map: 1   Cumulative CPU: 1.21 sec   HDFS Read: 554 HDFS Write: 117 SUCCESS
+Stage-Stage-13: Map: 1   Cumulative CPU: 1.7 sec   HDFS Read: 554 HDFS Write: 43 SUCCESS
+Total MapReduce CPU Time Spent: 12 seconds 520 msec
+OK
+Time taken: 102.235 seconds
+Warning: Map Join MAPJOIN[138][bigTable=?] in task 'Stage-14:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[40][tables = [a, b, c, sq_1_notin_nullcheck]] in Stage 'Stage-3:MAPRED' is a cross product
+Warning: Map Join MAPJOIN[139][bigTable=?] in task 'Stage-16:MAPRED' is a cross product
+Query ID = hadoop_20160505070606_1856d6a2-bcbb-4bdf-b303-dd9807db0394
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0186, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0186/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0186
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 1
+2016-05-05 07:06:35,715 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:06:41,873 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.44 sec
+2016-05-05 07:06:49,068 Stage-8 map = 100%,  reduce = 100%, Cumulative CPU 3.13 sec
+MapReduce Total cumulative CPU time: 3 seconds 130 msec
+Ended Job = job_1462424513485_0186
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070606_1856d6a2-bcbb-4bdf-b303-dd9807db0394.log
+2016-05-05 07:06:53	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:06:55	Processing rows:	200000	Hashtable size:	199999	Memory usage:	254653968	percentage:	0.273
+2016-05-05 07:06:56	Processing rows:	300000	Hashtable size:	299999	Memory usage:	129394992	percentage:	0.139
+2016-05-05 07:06:56	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable
+2016-05-05 07:06:56	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable (13124998 bytes)
+2016-05-05 07:06:56	Dump the side-table for tag: 2 with group count: 0 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable
+2016-05-05 07:06:56	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable (260 bytes)
+2016-05-05 07:06:56	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable
+2016-05-05 07:06:56	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable (279 bytes)
+2016-05-05 07:06:56	End of local task; Time Taken: 2.636 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0187, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0187/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0187
+Hadoop job information for Stage-17: number of mappers: 1; number of reducers: 0
+2016-05-05 07:07:03,388 Stage-17 map = 0%,  reduce = 0%
+2016-05-05 07:07:10,576 Stage-17 map = 100%,  reduce = 0%, Cumulative CPU 3.48 sec
+MapReduce Total cumulative CPU time: 3 seconds 480 msec
+Ended Job = job_1462424513485_0187
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070606_1856d6a2-bcbb-4bdf-b303-dd9807db0394.log
+2016-05-05 07:07:15	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:07:17	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable
+2016-05-05 07:07:17	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable (8928107 bytes)
+2016-05-05 07:07:17	End of local task; Time Taken: 2.262 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0188, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0188/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0188
+Hadoop job information for Stage-16: number of mappers: 1; number of reducers: 0
+2016-05-05 07:07:24,310 Stage-16 map = 0%,  reduce = 0%
+2016-05-05 07:07:31,525 Stage-16 map = 100%,  reduce = 0%, Cumulative CPU 2.84 sec
+MapReduce Total cumulative CPU time: 2 seconds 840 msec
+Ended Job = job_1462424513485_0188
+Stage-20 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070606_1856d6a2-bcbb-4bdf-b303-dd9807db0394.log
+2016-05-05 07:07:36	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:07:37	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable
+2016-05-05 07:07:37	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable (276 bytes)
+2016-05-05 07:07:37	End of local task; Time Taken: 1.134 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0189, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0189/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0189
+Hadoop job information for Stage-14: number of mappers: 1; number of reducers: 0
+2016-05-05 07:07:43,807 Stage-14 map = 0%,  reduce = 0%
+2016-05-05 07:07:49,995 Stage-14 map = 100%,  reduce = 0%, Cumulative CPU 1.19 sec
+MapReduce Total cumulative CPU time: 1 seconds 190 msec
+Ended Job = job_1462424513485_0189
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070606_1856d6a2-bcbb-4bdf-b303-dd9807db0394.log
+2016-05-05 07:07:54	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:07:55	Dump the side-table for tag: 1 with group count: 2 into file: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable
+2016-05-05 07:07:55	Uploaded 1 File to: file:/mnt/tmp/hadoop/82067737-b52a-47a9-bf8e-ddc97d03ee8c/hive_2016-05-05_07-06-29_987_4235532969966900176-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable (298 bytes)
+2016-05-05 07:07:55	End of local task; Time Taken: 1.177 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0190, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0190/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0190
+Hadoop job information for Stage-5: number of mappers: 1; number of reducers: 1
+2016-05-05 07:08:02,012 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:08:08,171 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 1.57 sec
+2016-05-05 07:08:15,366 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 3.32 sec
+MapReduce Total cumulative CPU time: 3 seconds 320 msec
+Ended Job = job_1462424513485_0190
+Loading data to table default.open
+Table default.open stats: [numFiles=2, numRows=1, totalSize=21, rawDataSize=20]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 1  Reduce: 1   Cumulative CPU: 3.13 sec   HDFS Read: 395 HDFS Write: 114 SUCCESS
+Stage-Stage-17: Map: 1   Cumulative CPU: 3.48 sec   HDFS Read: 15851484 HDFS Write: 131 SUCCESS
+Stage-Stage-16: Map: 1   Cumulative CPU: 2.84 sec   HDFS Read: 568 HDFS Write: 149 SUCCESS
+Stage-Stage-14: Map: 1   Cumulative CPU: 1.19 sec   HDFS Read: 586 HDFS Write: 147 SUCCESS
+Stage-Stage-5: Map: 1  Reduce: 1   Cumulative CPU: 3.32 sec   HDFS Read: 584 HDFS Write: 38 SUCCESS
+Total MapReduce CPU Time Spent: 13 seconds 960 msec
+OK
+Time taken: 106.522 seconds
+Query ID = hadoop_20160505070808_368e0d2c-ff17-4439-8f12-31e594991efa
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0191, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0191/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0191
+Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+2016-05-05 07:08:23,625 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:08:30,860 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.68 sec
+2016-05-05 07:08:38,068 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.47 sec
+MapReduce Total cumulative CPU time: 4 seconds 470 msec
+Ended Job = job_1462424513485_0191
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=1, totalSize=21, rawDataSize=20]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 2  Reduce: 1   Cumulative CPU: 4.47 sec   HDFS Read: 514 HDFS Write: 89 SUCCESS
+Total MapReduce CPU Time Spent: 4 seconds 470 msec
+OK
+Time taken: 22.692 seconds
+Query ID = hadoop_20160505070808_d95b0419-11fc-4822-a002-730fb0d9fc18
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0192, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0192/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0192
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:08:45,396 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:08:51,554 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.13 sec
+2016-05-05 07:08:57,727 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.48 sec
+MapReduce Total cumulative CPU time: 2 seconds 480 msec
+Ended Job = job_1462424513485_0192
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=21, rawDataSize=20]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.48 sec   HDFS Read: 264 HDFS Write: 93 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 480 msec
+OK
+Time taken: 19.664 seconds
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.882 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.206 seconds, Fetched: 1 row(s)
+Warning: Map Join MAPJOIN[60][bigTable=a] in task 'Stage-8:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[16][tables = [a, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505070909_c11986fe-2f1c-49a8-88b0-f04bb260c0cb
+Total jobs = 4
+Launching Job 1 out of 4
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0193, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0193/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0193
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:09:15,792 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:09:22,068 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.46 sec
+2016-05-05 07:09:29,395 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.23 sec
+MapReduce Total cumulative CPU time: 3 seconds 230 msec
+Ended Job = job_1462424513485_0193
+Stage-11 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070909_c11986fe-2f1c-49a8-88b0-f04bb260c0cb.log
+2016-05-05 07:09:34	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:09:35	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-09-08_993_6268410221946724082-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 07:09:35	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-09-08_993_6268410221946724082-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (276 bytes)
+2016-05-05 07:09:35	End of local task; Time Taken: 1.375 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0194, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0194/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0194
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:09:42,012 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:09:48,224 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.3 sec
+MapReduce Total cumulative CPU time: 1 seconds 300 msec
+Ended Job = job_1462424513485_0194
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505070909_c11986fe-2f1c-49a8-88b0-f04bb260c0cb.log
+2016-05-05 07:09:52	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:09:53	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-09-08_993_6268410221946724082-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable
+2016-05-05 07:09:53	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-09-08_993_6268410221946724082-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable (281 bytes)
+2016-05-05 07:09:53	End of local task; Time Taken: 1.192 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 4 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0195, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0195/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0195
+Hadoop job information for Stage-7: number of mappers: 1; number of reducers: 0
+2016-05-05 07:10:00,087 Stage-7 map = 0%,  reduce = 0%
+2016-05-05 07:10:06,277 Stage-7 map = 100%,  reduce = 0%, Cumulative CPU 1.83 sec
+MapReduce Total cumulative CPU time: 1 seconds 830 msec
+Ended Job = job_1462424513485_0195
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=0, totalSize=0, rawDataSize=0]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.23 sec   HDFS Read: 268 HDFS Write: 114 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.3 sec   HDFS Read: 264 HDFS Write: 125 SUCCESS
+Stage-Stage-7: Map: 1   Cumulative CPU: 1.83 sec   HDFS Read: 562 HDFS Write: 38 SUCCESS
+Total MapReduce CPU Time Spent: 6 seconds 360 msec
+OK
+Time taken: 59.48 seconds
+Query ID = hadoop_20160505071010_d4129185-97bf-4216-8a80-7ecd1e7fcf64
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0196, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0196/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0196
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 07:10:13,925 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:10:20,110 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.31 sec
+MapReduce Total cumulative CPU time: 1 seconds 310 msec
+Ended Job = job_1462424513485_0196
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-08_477_5128169902149752132-1/-ext-10000
+Loading data to table default.closed
+Table default.closed stats: [numFiles=3, numRows=3, totalSize=56, rawDataSize=53]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.31 sec   HDFS Read: 268 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 310 msec
+OK
+Time taken: 12.785 seconds
+Warning: Map Join MAPJOIN[75][bigTable=?] in task 'Stage-9:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[21][tables = [a, original, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505071010_7a3133da-2f40-4686-9ec4-d1d1759d5074
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0197, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0197/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0197
+Hadoop job information for Stage-6: number of mappers: 2; number of reducers: 1
+2016-05-05 07:10:27,076 Stage-6 map = 0%,  reduce = 0%
+2016-05-05 07:10:33,268 Stage-6 map = 100%,  reduce = 0%, Cumulative CPU 2.83 sec
+2016-05-05 07:10:40,488 Stage-6 map = 100%,  reduce = 100%, Cumulative CPU 4.58 sec
+MapReduce Total cumulative CPU time: 4 seconds 580 msec
+Ended Job = job_1462424513485_0197
+Stage-15 is selected by condition resolver.
+Stage-1 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071010_7a3133da-2f40-4686-9ec4-d1d1759d5074.log
+2016-05-05 07:10:45	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:10:46	Processing rows:	200000	Hashtable size:	199999	Memory usage:	274401504	percentage:	0.294
+2016-05-05 07:10:47	Processing rows:	300000	Hashtable size:	299999	Memory usage:	212986776	percentage:	0.228
+2016-05-05 07:10:47	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-21_263_8745227699313904630-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable
+2016-05-05 07:10:47	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-21_263_8745227699313904630-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable (18083774 bytes)
+2016-05-05 07:10:47	End of local task; Time Taken: 2.705 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0198, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0198/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0198
+Hadoop job information for Stage-11: number of mappers: 1; number of reducers: 0
+2016-05-05 07:10:55,481 Stage-11 map = 0%,  reduce = 0%
+2016-05-05 07:11:02,672 Stage-11 map = 100%,  reduce = 0%, Cumulative CPU 2.44 sec
+MapReduce Total cumulative CPU time: 2 seconds 440 msec
+Ended Job = job_1462424513485_0198
+Stage-14 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071010_7a3133da-2f40-4686-9ec4-d1d1759d5074.log
+2016-05-05 07:11:07	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:11:08	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-21_263_8745227699313904630-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable
+2016-05-05 07:11:08	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-21_263_8745227699313904630-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable (276 bytes)
+2016-05-05 07:11:08	End of local task; Time Taken: 1.11 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0199, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0199/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0199
+Hadoop job information for Stage-9: number of mappers: 1; number of reducers: 0
+2016-05-05 07:11:14,867 Stage-9 map = 0%,  reduce = 0%
+2016-05-05 07:11:21,031 Stage-9 map = 100%,  reduce = 0%, Cumulative CPU 1.23 sec
+MapReduce Total cumulative CPU time: 1 seconds 230 msec
+Ended Job = job_1462424513485_0199
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071010_7a3133da-2f40-4686-9ec4-d1d1759d5074.log
+2016-05-05 07:11:25	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:11:26	Dump the side-table for tag: 1 with group count: 3 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-21_263_8745227699313904630-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable
+2016-05-05 07:11:26	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-10-21_263_8745227699313904630-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable (319 bytes)
+2016-05-05 07:11:26	End of local task; Time Taken: 1.187 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0200, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0200/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0200
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:11:33,038 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:11:39,199 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.53 sec
+MapReduce Total cumulative CPU time: 1 seconds 530 msec
+Ended Job = job_1462424513485_0200
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=2, totalSize=44, rawDataSize=42]
+MapReduce Jobs Launched: 
+Stage-Stage-6: Map: 2  Reduce: 1   Cumulative CPU: 4.58 sec   HDFS Read: 668 HDFS Write: 114 SUCCESS
+Stage-Stage-11: Map: 1   Cumulative CPU: 2.44 sec   HDFS Read: 268 HDFS Write: 192 SUCCESS
+Stage-Stage-9: Map: 1   Cumulative CPU: 1.23 sec   HDFS Read: 629 HDFS Write: 192 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.53 sec   HDFS Read: 629 HDFS Write: 119 SUCCESS
+Total MapReduce CPU Time Spent: 9 seconds 780 msec
+OK
+Time taken: 79.078 seconds
+Warning: Map Join MAPJOIN[207][bigTable=?] in task 'Stage-15:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[44][tables = [current1, o, sq_1_notin_nullcheck]] in Stage 'Stage-6:MAPRED' is a cross product
+Query ID = hadoop_20160505071111_7cf1c781-ca28-412f-849a-69f43ecc6c9b
+Total jobs = 7
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071111_7cf1c781-ca28-412f-849a-69f43ecc6c9b.log
+2016-05-05 07:11:44	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:11:45	Dump the side-table for tag: 1 with group count: 0 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile71--.hashtable
+2016-05-05 07:11:45	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile71--.hashtable (260 bytes)
+2016-05-05 07:11:45	End of local task; Time Taken: 1.014 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071111_7cf1c781-ca28-412f-849a-69f43ecc6c9b.log
+2016-05-05 07:11:49	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:11:51	Dump the side-table for tag: 0 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable
+2016-05-05 07:11:51	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable (281 bytes)
+2016-05-05 07:11:51	End of local task; Time Taken: 1.44 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071111_7cf1c781-ca28-412f-849a-69f43ecc6c9b.log
+2016-05-05 07:11:55	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:11:56	Dump the side-table for tag: 1 with group count: 0 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile91--.hashtable
+2016-05-05 07:11:56	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile91--.hashtable (260 bytes)
+2016-05-05 07:11:56	End of local task; Time Taken: 1.037 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 7
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0201, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0201/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0201
+Hadoop job information for Stage-5: number of mappers: 3; number of reducers: 1
+2016-05-05 07:12:02,720 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:12:08,916 Stage-5 map = 33%,  reduce = 0%, Cumulative CPU 1.61 sec
+2016-05-05 07:12:09,950 Stage-5 map = 67%,  reduce = 0%, Cumulative CPU 3.52 sec
+2016-05-05 07:12:10,980 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 5.47 sec
+2016-05-05 07:12:16,120 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 7.46 sec
+MapReduce Total cumulative CPU time: 7 seconds 460 msec
+Ended Job = job_1462424513485_0201
+Launching Job 2 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0202, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0202/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0202
+Hadoop job information for Stage-18: number of mappers: 1; number of reducers: 0
+2016-05-05 07:12:22,542 Stage-18 map = 0%,  reduce = 0%
+2016-05-05 07:12:28,725 Stage-18 map = 100%,  reduce = 0%, Cumulative CPU 2.79 sec
+MapReduce Total cumulative CPU time: 2 seconds 790 msec
+Ended Job = job_1462424513485_0202
+Launching Job 3 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0203, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0203/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0203
+Hadoop job information for Stage-19: number of mappers: 1; number of reducers: 0
+2016-05-05 07:12:36,184 Stage-19 map = 0%,  reduce = 0%
+2016-05-05 07:12:42,435 Stage-19 map = 100%,  reduce = 0%, Cumulative CPU 1.78 sec
+MapReduce Total cumulative CPU time: 1 seconds 780 msec
+Ended Job = job_1462424513485_0203
+Stage-21 is selected by condition resolver.
+Stage-6 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071111_7cf1c781-ca28-412f-849a-69f43ecc6c9b.log
+2016-05-05 07:12:47	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:12:48	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable
+2016-05-05 07:12:48	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable (276 bytes)
+2016-05-05 07:12:48	End of local task; Time Taken: 1.143 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0204, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0204/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0204
+Hadoop job information for Stage-15: number of mappers: 1; number of reducers: 0
+2016-05-05 07:12:54,353 Stage-15 map = 0%,  reduce = 0%
+2016-05-05 07:13:00,517 Stage-15 map = 100%,  reduce = 0%, Cumulative CPU 1.04 sec
+MapReduce Total cumulative CPU time: 1 seconds 40 msec
+Ended Job = job_1462424513485_0204
+Stage-20 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071111_7cf1c781-ca28-412f-849a-69f43ecc6c9b.log
+2016-05-05 07:13:05	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:13:06	Dump the side-table for tag: 1 with group count: 3 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable
+2016-05-05 07:13:06	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-11-40_347_3526348244570398785-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable (319 bytes)
+2016-05-05 07:13:06	End of local task; Time Taken: 1.203 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 7 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0205, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0205/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0205
+Hadoop job information for Stage-13: number of mappers: 1; number of reducers: 0
+2016-05-05 07:13:12,535 Stage-13 map = 0%,  reduce = 0%
+2016-05-05 07:13:18,691 Stage-13 map = 100%,  reduce = 0%, Cumulative CPU 1.72 sec
+MapReduce Total cumulative CPU time: 1 seconds 720 msec
+Ended Job = job_1462424513485_0205
+Loading data to table default.came_from
+Table default.came_from stats: [numFiles=3, numRows=4, totalSize=28, rawDataSize=24]
+MapReduce Jobs Launched: 
+Stage-Stage-5: Map: 3  Reduce: 1   Cumulative CPU: 7.46 sec   HDFS Read: 962 HDFS Write: 114 SUCCESS
+Stage-Stage-18: Map: 1   Cumulative CPU: 2.79 sec   HDFS Read: 15851484 HDFS Write: 171 SUCCESS
+Stage-Stage-19: Map: 1   Cumulative CPU: 1.78 sec   HDFS Read: 294 HDFS Write: 96 SUCCESS
+Stage-Stage-15: Map: 1   Cumulative CPU: 1.04 sec   HDFS Read: 608 HDFS Write: 171 SUCCESS
+Stage-Stage-13: Map: 1   Cumulative CPU: 1.72 sec   HDFS Read: 608 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 14 seconds 790 msec
+OK
+Time taken: 99.493 seconds
+Warning: Map Join MAPJOIN[138][bigTable=?] in task 'Stage-14:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[40][tables = [a, b, c, sq_1_notin_nullcheck]] in Stage 'Stage-3:MAPRED' is a cross product
+Warning: Map Join MAPJOIN[139][bigTable=?] in task 'Stage-16:MAPRED' is a cross product
+Query ID = hadoop_20160505071313_cfb1a091-b8ad-4375-9833-38420bcb3c86
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0206, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0206/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0206
+Hadoop job information for Stage-8: number of mappers: 2; number of reducers: 1
+2016-05-05 07:13:26,350 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:13:32,511 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 2.86 sec
+2016-05-05 07:13:39,737 Stage-8 map = 100%,  reduce = 100%, Cumulative CPU 4.74 sec
+MapReduce Total cumulative CPU time: 4 seconds 740 msec
+Ended Job = job_1462424513485_0206
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071313_cfb1a091-b8ad-4375-9833-38420bcb3c86.log
+2016-05-05 07:13:44	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:13:46	Processing rows:	200000	Hashtable size:	199997	Memory usage:	258893872	percentage:	0.278
+2016-05-05 07:13:46	Processing rows:	300000	Hashtable size:	299997	Memory usage:	129127424	percentage:	0.139
+2016-05-05 07:13:46	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable
+2016-05-05 07:13:47	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable (13124998 bytes)
+2016-05-05 07:13:47	Dump the side-table for tag: 2 with group count: 2 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable
+2016-05-05 07:13:47	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable (314 bytes)
+2016-05-05 07:13:47	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable
+2016-05-05 07:13:47	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable (281 bytes)
+2016-05-05 07:13:47	End of local task; Time Taken: 2.61 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0207, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0207/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0207
+Hadoop job information for Stage-17: number of mappers: 1; number of reducers: 0
+2016-05-05 07:13:53,956 Stage-17 map = 0%,  reduce = 0%
+2016-05-05 07:14:02,170 Stage-17 map = 100%,  reduce = 0%, Cumulative CPU 3.53 sec
+MapReduce Total cumulative CPU time: 3 seconds 530 msec
+Ended Job = job_1462424513485_0207
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071313_cfb1a091-b8ad-4375-9833-38420bcb3c86.log
+2016-05-05 07:14:06	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:14:08	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable
+2016-05-05 07:14:08	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable (8928107 bytes)
+2016-05-05 07:14:08	End of local task; Time Taken: 2.251 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0208, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0208/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0208
+Hadoop job information for Stage-16: number of mappers: 1; number of reducers: 0
+2016-05-05 07:14:15,804 Stage-16 map = 0%,  reduce = 0%
+2016-05-05 07:14:24,017 Stage-16 map = 100%,  reduce = 0%, Cumulative CPU 3.55 sec
+MapReduce Total cumulative CPU time: 3 seconds 550 msec
+Ended Job = job_1462424513485_0208
+Stage-20 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071313_cfb1a091-b8ad-4375-9833-38420bcb3c86.log
+2016-05-05 07:14:28	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:14:29	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable
+2016-05-05 07:14:29	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable (276 bytes)
+2016-05-05 07:14:29	End of local task; Time Taken: 1.107 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0209, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0209/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0209
+Hadoop job information for Stage-14: number of mappers: 1; number of reducers: 0
+2016-05-05 07:14:35,811 Stage-14 map = 0%,  reduce = 0%
+2016-05-05 07:14:41,986 Stage-14 map = 100%,  reduce = 0%, Cumulative CPU 1.19 sec
+MapReduce Total cumulative CPU time: 1 seconds 190 msec
+Ended Job = job_1462424513485_0209
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071313_cfb1a091-b8ad-4375-9833-38420bcb3c86.log
+2016-05-05 07:14:46	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:14:47	Dump the side-table for tag: 1 with group count: 3 into file: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable
+2016-05-05 07:14:47	Uploaded 1 File to: file:/mnt/tmp/hadoop/e35a1041-5eea-486c-82dc-b14d81dcda65/hive_2016-05-05_07-13-19_844_1386461606701329421-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable (319 bytes)
+2016-05-05 07:14:47	End of local task; Time Taken: 1.181 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0210, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0210/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0210
+Hadoop job information for Stage-5: number of mappers: 1; number of reducers: 1
+2016-05-05 07:14:54,256 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:15:00,427 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 1.61 sec
+2016-05-05 07:15:07,637 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 3.49 sec
+MapReduce Total cumulative CPU time: 3 seconds 490 msec
+Ended Job = job_1462424513485_0210
+Loading data to table default.open
+Table default.open stats: [numFiles=2, numRows=2, totalSize=44, rawDataSize=42]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 2  Reduce: 1   Cumulative CPU: 4.74 sec   HDFS Read: 668 HDFS Write: 114 SUCCESS
+Stage-Stage-17: Map: 1   Cumulative CPU: 3.53 sec   HDFS Read: 15851484 HDFS Write: 215 SUCCESS
+Stage-Stage-16: Map: 1   Cumulative CPU: 3.55 sec   HDFS Read: 652 HDFS Write: 269 SUCCESS
+Stage-Stage-14: Map: 1   Cumulative CPU: 1.19 sec   HDFS Read: 706 HDFS Write: 263 SUCCESS
+Stage-Stage-5: Map: 1  Reduce: 1   Cumulative CPU: 3.49 sec   HDFS Read: 700 HDFS Write: 112 SUCCESS
+Total MapReduce CPU Time Spent: 16 seconds 500 msec
+OK
+Time taken: 108.93 seconds
+Query ID = hadoop_20160505071515_ad63a78a-faf5-4dde-8c92-0c4d0861b177
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0211, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0211/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0211
+Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+2016-05-05 07:15:14,221 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:15:21,398 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.44 sec
+2016-05-05 07:15:28,586 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.28 sec
+MapReduce Total cumulative CPU time: 4 seconds 280 msec
+Ended Job = job_1462424513485_0211
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=2, totalSize=44, rawDataSize=42]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 2  Reduce: 1   Cumulative CPU: 4.28 sec   HDFS Read: 537 HDFS Write: 112 SUCCESS
+Total MapReduce CPU Time Spent: 4 seconds 280 msec
+OK
+Time taken: 20.944 seconds
+Query ID = hadoop_20160505071515_704202ec-0a15-4116-bf36-33e820e5950c
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0212, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0212/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0212
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:15:35,517 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:15:41,710 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.09 sec
+2016-05-05 07:15:47,889 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.4 sec
+MapReduce Total cumulative CPU time: 2 seconds 400 msec
+Ended Job = job_1462424513485_0212
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=21, rawDataSize=20]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.4 sec   HDFS Read: 287 HDFS Write: 93 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 400 msec
+OK
+Time taken: 19.296 seconds
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.875 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.241 seconds, Fetched: 1 row(s)
+Warning: Map Join MAPJOIN[60][bigTable=a] in task 'Stage-8:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[16][tables = [a, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505071515_5c27ea31-254e-429e-8e91-8c9cfd7582c3
+Total jobs = 4
+Launching Job 1 out of 4
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0213, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0213/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0213
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:16:06,926 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:16:12,178 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.44 sec
+2016-05-05 07:16:19,425 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.16 sec
+MapReduce Total cumulative CPU time: 3 seconds 160 msec
+Ended Job = job_1462424513485_0213
+Stage-11 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071515_5c27ea31-254e-429e-8e91-8c9cfd7582c3.log
+2016-05-05 07:16:24	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:16:25	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-15-59_042_2984482268508354320-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 07:16:25	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-15-59_042_2984482268508354320-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (276 bytes)
+2016-05-05 07:16:25	End of local task; Time Taken: 1.15 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0214, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0214/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0214
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:16:31,511 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:16:37,694 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.3 sec
+MapReduce Total cumulative CPU time: 1 seconds 300 msec
+Ended Job = job_1462424513485_0214
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071515_5c27ea31-254e-429e-8e91-8c9cfd7582c3.log
+2016-05-05 07:16:42	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:16:43	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-15-59_042_2984482268508354320-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable
+2016-05-05 07:16:43	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-15-59_042_2984482268508354320-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable (281 bytes)
+2016-05-05 07:16:43	End of local task; Time Taken: 1.149 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 4 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0215, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0215/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0215
+Hadoop job information for Stage-7: number of mappers: 1; number of reducers: 0
+2016-05-05 07:16:49,850 Stage-7 map = 0%,  reduce = 0%
+2016-05-05 07:16:56,023 Stage-7 map = 100%,  reduce = 0%, Cumulative CPU 1.73 sec
+MapReduce Total cumulative CPU time: 1 seconds 730 msec
+Ended Job = job_1462424513485_0215
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=1, totalSize=23, rawDataSize=22]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.16 sec   HDFS Read: 268 HDFS Write: 114 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.3 sec   HDFS Read: 287 HDFS Write: 156 SUCCESS
+Stage-Stage-7: Map: 1   Cumulative CPU: 1.73 sec   HDFS Read: 593 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 6 seconds 190 msec
+OK
+Time taken: 58.147 seconds
+Query ID = hadoop_20160505071616_11c1134d-c051-4136-9e9b-d15c7cdc2631
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0216, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0216/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0216
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 07:17:02,599 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:17:08,770 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.23 sec
+MapReduce Total cumulative CPU time: 1 seconds 230 msec
+Ended Job = job_1462424513485_0216
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-16-57_193_6927725856144787469-1/-ext-10000
+Loading data to table default.closed
+Table default.closed stats: [numFiles=4, numRows=4, totalSize=77, rawDataSize=73]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.23 sec   HDFS Read: 268 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 230 msec
+OK
+Time taken: 12.726 seconds
+Warning: Map Join MAPJOIN[75][bigTable=?] in task 'Stage-9:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[21][tables = [a, original, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505071717_2e120302-f9db-46a7-8be6-30a70519753e
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0217, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0217/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0217
+Hadoop job information for Stage-6: number of mappers: 2; number of reducers: 1
+2016-05-05 07:17:16,538 Stage-6 map = 0%,  reduce = 0%
+2016-05-05 07:17:22,734 Stage-6 map = 100%,  reduce = 0%, Cumulative CPU 2.85 sec
+2016-05-05 07:17:29,953 Stage-6 map = 100%,  reduce = 100%, Cumulative CPU 4.7 sec
+MapReduce Total cumulative CPU time: 4 seconds 700 msec
+Ended Job = job_1462424513485_0217
+Stage-15 is selected by condition resolver.
+Stage-1 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071717_2e120302-f9db-46a7-8be6-30a70519753e.log
+2016-05-05 07:17:34	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:17:36	Processing rows:	200000	Hashtable size:	199999	Memory usage:	274443224	percentage:	0.294
+2016-05-05 07:17:36	Processing rows:	300000	Hashtable size:	299999	Memory usage:	208301608	percentage:	0.223
+2016-05-05 07:17:36	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-17-09_920_4244290011778618252-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable
+2016-05-05 07:17:37	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-17-09_920_4244290011778618252-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable (18083774 bytes)
+2016-05-05 07:17:37	End of local task; Time Taken: 2.712 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0218, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0218/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0218
+Hadoop job information for Stage-11: number of mappers: 1; number of reducers: 0
+2016-05-05 07:17:44,938 Stage-11 map = 0%,  reduce = 0%
+2016-05-05 07:17:52,151 Stage-11 map = 100%,  reduce = 0%, Cumulative CPU 2.35 sec
+MapReduce Total cumulative CPU time: 2 seconds 350 msec
+Ended Job = job_1462424513485_0218
+Stage-14 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071717_2e120302-f9db-46a7-8be6-30a70519753e.log
+2016-05-05 07:17:56	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:17:57	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-17-09_920_4244290011778618252-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable
+2016-05-05 07:17:57	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-17-09_920_4244290011778618252-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable (276 bytes)
+2016-05-05 07:17:57	End of local task; Time Taken: 1.205 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0219, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0219/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0219
+Hadoop job information for Stage-9: number of mappers: 1; number of reducers: 0
+2016-05-05 07:18:04,299 Stage-9 map = 0%,  reduce = 0%
+2016-05-05 07:18:10,461 Stage-9 map = 100%,  reduce = 0%, Cumulative CPU 1.03 sec
+MapReduce Total cumulative CPU time: 1 seconds 30 msec
+Ended Job = job_1462424513485_0219
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071717_2e120302-f9db-46a7-8be6-30a70519753e.log
+2016-05-05 07:18:14	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:18:16	Dump the side-table for tag: 1 with group count: 4 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-17-09_920_4244290011778618252-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable
+2016-05-05 07:18:16	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-17-09_920_4244290011778618252-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable (340 bytes)
+2016-05-05 07:18:16	End of local task; Time Taken: 1.21 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0220, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0220/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0220
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:18:22,747 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:18:28,914 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.75 sec
+MapReduce Total cumulative CPU time: 1 seconds 750 msec
+Ended Job = job_1462424513485_0220
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=2, totalSize=42, rawDataSize=40]
+MapReduce Jobs Launched: 
+Stage-Stage-6: Map: 2  Reduce: 1   Cumulative CPU: 4.7 sec   HDFS Read: 804 HDFS Write: 114 SUCCESS
+Stage-Stage-11: Map: 1   Cumulative CPU: 2.35 sec   HDFS Read: 268 HDFS Write: 192 SUCCESS
+Stage-Stage-9: Map: 1   Cumulative CPU: 1.03 sec   HDFS Read: 629 HDFS Write: 192 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.75 sec   HDFS Read: 629 HDFS Write: 117 SUCCESS
+Total MapReduce CPU Time Spent: 9 seconds 830 msec
+OK
+Time taken: 80.182 seconds
+Warning: Map Join MAPJOIN[207][bigTable=?] in task 'Stage-15:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[44][tables = [current1, o, sq_1_notin_nullcheck]] in Stage 'Stage-6:MAPRED' is a cross product
+Query ID = hadoop_20160505071818_01de50dd-037c-441e-9387-ef324dfccca7
+Total jobs = 7
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071818_01de50dd-037c-441e-9387-ef324dfccca7.log
+2016-05-05 07:18:34	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:18:35	Dump the side-table for tag: 1 with group count: 0 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile71--.hashtable
+2016-05-05 07:18:35	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile71--.hashtable (260 bytes)
+2016-05-05 07:18:35	End of local task; Time Taken: 1.438 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071818_01de50dd-037c-441e-9387-ef324dfccca7.log
+2016-05-05 07:18:39	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:18:41	Dump the side-table for tag: 0 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable
+2016-05-05 07:18:41	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable (281 bytes)
+2016-05-05 07:18:41	End of local task; Time Taken: 1.454 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071818_01de50dd-037c-441e-9387-ef324dfccca7.log
+2016-05-05 07:18:45	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:18:47	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile91--.hashtable
+2016-05-05 07:18:47	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile91--.hashtable (288 bytes)
+2016-05-05 07:18:47	End of local task; Time Taken: 1.454 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 7
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0221, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0221/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0221
+Hadoop job information for Stage-5: number of mappers: 3; number of reducers: 1
+2016-05-05 07:18:54,213 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:19:00,399 Stage-5 map = 33%,  reduce = 0%, Cumulative CPU 1.59 sec
+2016-05-05 07:19:02,470 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 5.23 sec
+2016-05-05 07:19:07,613 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 7.2 sec
+MapReduce Total cumulative CPU time: 7 seconds 200 msec
+Ended Job = job_1462424513485_0221
+Launching Job 2 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0222, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0222/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0222
+Hadoop job information for Stage-18: number of mappers: 1; number of reducers: 0
+2016-05-05 07:19:14,022 Stage-18 map = 0%,  reduce = 0%
+2016-05-05 07:19:21,205 Stage-18 map = 100%,  reduce = 0%, Cumulative CPU 2.75 sec
+MapReduce Total cumulative CPU time: 2 seconds 750 msec
+Ended Job = job_1462424513485_0222
+Launching Job 3 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0223, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0223/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0223
+Hadoop job information for Stage-19: number of mappers: 1; number of reducers: 0
+2016-05-05 07:19:27,621 Stage-19 map = 0%,  reduce = 0%
+2016-05-05 07:19:33,858 Stage-19 map = 100%,  reduce = 0%, Cumulative CPU 1.72 sec
+MapReduce Total cumulative CPU time: 1 seconds 720 msec
+Ended Job = job_1462424513485_0223
+Stage-21 is selected by condition resolver.
+Stage-6 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071818_01de50dd-037c-441e-9387-ef324dfccca7.log
+2016-05-05 07:19:38	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:19:39	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable
+2016-05-05 07:19:39	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable (276 bytes)
+2016-05-05 07:19:39	End of local task; Time Taken: 1.12 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0224, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0224/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0224
+Hadoop job information for Stage-15: number of mappers: 1; number of reducers: 0
+2016-05-05 07:19:45,724 Stage-15 map = 0%,  reduce = 0%
+2016-05-05 07:19:51,897 Stage-15 map = 100%,  reduce = 0%, Cumulative CPU 1.02 sec
+MapReduce Total cumulative CPU time: 1 seconds 20 msec
+Ended Job = job_1462424513485_0224
+Stage-20 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505071818_01de50dd-037c-441e-9387-ef324dfccca7.log
+2016-05-05 07:19:56	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:19:57	Dump the side-table for tag: 1 with group count: 4 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable
+2016-05-05 07:19:57	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-18-30_108_5140201579931798107-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable (340 bytes)
+2016-05-05 07:19:57	End of local task; Time Taken: 1.24 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 7 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0225, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0225/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0225
+Hadoop job information for Stage-13: number of mappers: 1; number of reducers: 0
+2016-05-05 07:20:04,057 Stage-13 map = 0%,  reduce = 0%
+2016-05-05 07:20:10,221 Stage-13 map = 100%,  reduce = 0%, Cumulative CPU 1.69 sec
+MapReduce Total cumulative CPU time: 1 seconds 690 msec
+Ended Job = job_1462424513485_0225
+Loading data to table default.came_from
+Table default.came_from stats: [numFiles=4, numRows=6, totalSize=44, rawDataSize=38]
+MapReduce Jobs Launched: 
+Stage-Stage-5: Map: 3  Reduce: 1   Cumulative CPU: 7.2 sec   HDFS Read: 1096 HDFS Write: 114 SUCCESS
+Stage-Stage-18: Map: 1   Cumulative CPU: 2.75 sec   HDFS Read: 15851484 HDFS Write: 171 SUCCESS
+Stage-Stage-19: Map: 1   Cumulative CPU: 1.72 sec   HDFS Read: 292 HDFS Write: 96 SUCCESS
+Stage-Stage-15: Map: 1   Cumulative CPU: 1.02 sec   HDFS Read: 608 HDFS Write: 171 SUCCESS
+Stage-Stage-13: Map: 1   Cumulative CPU: 1.69 sec   HDFS Read: 608 HDFS Write: 89 SUCCESS
+Total MapReduce CPU Time Spent: 14 seconds 380 msec
+OK
+Time taken: 101.251 seconds
+Warning: Map Join MAPJOIN[138][bigTable=?] in task 'Stage-14:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[40][tables = [a, b, c, sq_1_notin_nullcheck]] in Stage 'Stage-3:MAPRED' is a cross product
+Warning: Map Join MAPJOIN[139][bigTable=?] in task 'Stage-16:MAPRED' is a cross product
+Query ID = hadoop_20160505072020_c79bfad5-58ae-4096-94ff-d7066ad8b429
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0226, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0226/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0226
+Hadoop job information for Stage-8: number of mappers: 2; number of reducers: 1
+2016-05-05 07:20:17,546 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:20:23,718 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 2.91 sec
+2016-05-05 07:20:30,916 Stage-8 map = 100%,  reduce = 100%, Cumulative CPU 4.75 sec
+MapReduce Total cumulative CPU time: 4 seconds 750 msec
+Ended Job = job_1462424513485_0226
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072020_c79bfad5-58ae-4096-94ff-d7066ad8b429.log
+2016-05-05 07:20:35	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:20:37	Processing rows:	200000	Hashtable size:	199997	Memory usage:	254311952	percentage:	0.273
+2016-05-05 07:20:37	Processing rows:	300000	Hashtable size:	299997	Memory usage:	129118864	percentage:	0.139
+2016-05-05 07:20:37	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable
+2016-05-05 07:20:38	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable (13124998 bytes)
+2016-05-05 07:20:38	Dump the side-table for tag: 2 with group count: 2 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable
+2016-05-05 07:20:38	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable (312 bytes)
+2016-05-05 07:20:38	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable
+2016-05-05 07:20:38	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable (281 bytes)
+2016-05-05 07:20:38	End of local task; Time Taken: 2.626 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0227, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0227/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0227
+Hadoop job information for Stage-17: number of mappers: 1; number of reducers: 0
+2016-05-05 07:20:45,418 Stage-17 map = 0%,  reduce = 0%
+2016-05-05 07:20:53,624 Stage-17 map = 100%,  reduce = 0%, Cumulative CPU 4.0 sec
+MapReduce Total cumulative CPU time: 4 seconds 0 msec
+Ended Job = job_1462424513485_0227
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072020_c79bfad5-58ae-4096-94ff-d7066ad8b429.log
+2016-05-05 07:20:58	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:21:00	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable
+2016-05-05 07:21:00	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable (8928107 bytes)
+2016-05-05 07:21:00	End of local task; Time Taken: 2.233 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0228, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0228/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0228
+Hadoop job information for Stage-16: number of mappers: 1; number of reducers: 0
+2016-05-05 07:21:07,705 Stage-16 map = 0%,  reduce = 0%
+2016-05-05 07:21:14,882 Stage-16 map = 100%,  reduce = 0%, Cumulative CPU 3.52 sec
+MapReduce Total cumulative CPU time: 3 seconds 520 msec
+Ended Job = job_1462424513485_0228
+Stage-20 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072020_c79bfad5-58ae-4096-94ff-d7066ad8b429.log
+2016-05-05 07:21:19	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:21:20	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable
+2016-05-05 07:21:20	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable (276 bytes)
+2016-05-05 07:21:20	End of local task; Time Taken: 1.127 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0229, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0229/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0229
+Hadoop job information for Stage-14: number of mappers: 1; number of reducers: 0
+2016-05-05 07:21:27,400 Stage-14 map = 0%,  reduce = 0%
+2016-05-05 07:21:33,556 Stage-14 map = 100%,  reduce = 0%, Cumulative CPU 1.21 sec
+MapReduce Total cumulative CPU time: 1 seconds 210 msec
+Ended Job = job_1462424513485_0229
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072020_c79bfad5-58ae-4096-94ff-d7066ad8b429.log
+2016-05-05 07:21:38	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:21:39	Dump the side-table for tag: 1 with group count: 4 into file: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable
+2016-05-05 07:21:39	Uploaded 1 File to: file:/mnt/tmp/hadoop/28c1ee06-f9f8-4bc8-8547-5e1bbffa709a/hive_2016-05-05_07-20-11_363_3411544062360890253-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable (340 bytes)
+2016-05-05 07:21:39	End of local task; Time Taken: 1.214 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0230, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0230/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0230
+Hadoop job information for Stage-5: number of mappers: 1; number of reducers: 1
+2016-05-05 07:21:45,645 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:21:51,800 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 1.56 sec
+2016-05-05 07:21:59,010 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 3.44 sec
+MapReduce Total cumulative CPU time: 3 seconds 440 msec
+Ended Job = job_1462424513485_0230
+Loading data to table default.open
+Table default.open stats: [numFiles=2, numRows=3, totalSize=65, rawDataSize=62]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 2  Reduce: 1   Cumulative CPU: 4.75 sec   HDFS Read: 804 HDFS Write: 114 SUCCESS
+Stage-Stage-17: Map: 1   Cumulative CPU: 4.0 sec   HDFS Read: 15851484 HDFS Write: 215 SUCCESS
+Stage-Stage-16: Map: 1   Cumulative CPU: 3.52 sec   HDFS Read: 652 HDFS Write: 269 SUCCESS
+Stage-Stage-14: Map: 1   Cumulative CPU: 1.21 sec   HDFS Read: 706 HDFS Write: 263 SUCCESS
+Stage-Stage-5: Map: 1  Reduce: 1   Cumulative CPU: 3.44 sec   HDFS Read: 700 HDFS Write: 110 SUCCESS
+Total MapReduce CPU Time Spent: 16 seconds 920 msec
+OK
+Time taken: 108.792 seconds
+Query ID = hadoop_20160505072222_7ae81594-3ba8-47eb-a4d9-b35c1ddc6a83
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0231, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0231/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0231
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:22:07,038 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:22:12,261 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.08 sec
+2016-05-05 07:22:19,447 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.9 sec
+MapReduce Total cumulative CPU time: 2 seconds 900 msec
+Ended Job = job_1462424513485_0231
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=3, totalSize=65, rawDataSize=62]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.9 sec   HDFS Read: 421 HDFS Write: 133 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 900 msec
+OK
+Time taken: 20.432 seconds
+Query ID = hadoop_20160505072222_2c1ba7b0-17d1-44fa-a479-9951c5523907
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0232, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0232/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0232
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:22:27,565 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:22:32,708 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.09 sec
+2016-05-05 07:22:39,902 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.4 sec
+MapReduce Total cumulative CPU time: 2 seconds 400 msec
+Ended Job = job_1462424513485_0232
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=19, rawDataSize=18]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.4 sec   HDFS Read: 308 HDFS Write: 91 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 400 msec
+OK
+Time taken: 20.464 seconds
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.988 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.256 seconds, Fetched: 1 row(s)
+Warning: Map Join MAPJOIN[60][bigTable=a] in task 'Stage-8:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[16][tables = [a, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505072222_a006864c-273f-46e2-adc6-404684052797
+Total jobs = 4
+Launching Job 1 out of 4
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0233, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0233/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0233
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:22:59,435 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:23:06,722 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.65 sec
+2016-05-05 07:23:13,955 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.37 sec
+MapReduce Total cumulative CPU time: 3 seconds 370 msec
+Ended Job = job_1462424513485_0233
+Stage-11 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072222_a006864c-273f-46e2-adc6-404684052797.log
+2016-05-05 07:23:18	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:23:19	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-22-52_571_2974988983969945002-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable
+2016-05-05 07:23:19	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-22-52_571_2974988983969945002-1/-local-10006/HashTable-Stage-8/MapJoin-mapfile11--.hashtable (276 bytes)
+2016-05-05 07:23:19	End of local task; Time Taken: 1.172 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0234, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0234/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0234
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:23:26,048 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:23:32,257 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.29 sec
+MapReduce Total cumulative CPU time: 1 seconds 290 msec
+Ended Job = job_1462424513485_0234
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072222_a006864c-273f-46e2-adc6-404684052797.log
+2016-05-05 07:23:36	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:23:38	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-22-52_571_2974988983969945002-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable
+2016-05-05 07:23:38	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-22-52_571_2974988983969945002-1/-local-10004/HashTable-Stage-7/MapJoin-mapfile01--.hashtable (279 bytes)
+2016-05-05 07:23:38	End of local task; Time Taken: 1.194 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 4 out of 4
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0235, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0235/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0235
+Hadoop job information for Stage-7: number of mappers: 1; number of reducers: 0
+2016-05-05 07:23:44,315 Stage-7 map = 0%,  reduce = 0%
+2016-05-05 07:23:50,490 Stage-7 map = 100%,  reduce = 0%, Cumulative CPU 1.48 sec
+MapReduce Total cumulative CPU time: 1 seconds 480 msec
+Ended Job = job_1462424513485_0235
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=2, totalSize=46, rawDataSize=44]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 3.37 sec   HDFS Read: 266 HDFS Write: 114 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.29 sec   HDFS Read: 308 HDFS Write: 185 SUCCESS
+Stage-Stage-7: Map: 1   Cumulative CPU: 1.48 sec   HDFS Read: 622 HDFS Write: 114 SUCCESS
+Total MapReduce CPU Time Spent: 6 seconds 140 msec
+OK
+Time taken: 59.083 seconds
+Query ID = hadoop_20160505072323_8d493435-a61c-499f-907d-9f3ff752a873
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0236, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0236/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0236
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2016-05-05 07:23:57,102 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:24:03,295 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.27 sec
+MapReduce Total cumulative CPU time: 1 seconds 270 msec
+Ended Job = job_1462424513485_0236
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: hdfs://ip-172-31-30-118.us-west-2.compute.internal:8020/tmp/hive/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-23-51_658_8700262040045073167-1/-ext-10000
+Loading data to table default.closed
+Table default.closed stats: [numFiles=5, numRows=5, totalSize=96, rawDataSize=91]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.27 sec   HDFS Read: 266 HDFS Write: 89 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 270 msec
+OK
+Time taken: 12.785 seconds
+Warning: Map Join MAPJOIN[75][bigTable=?] in task 'Stage-9:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[21][tables = [a, original, sq_1_notin_nullcheck]] in Stage 'Stage-2:MAPRED' is a cross product
+Query ID = hadoop_20160505072424_bcd07584-6191-4e76-8973-3e688f4e5879
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0237, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0237/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0237
+Hadoop job information for Stage-6: number of mappers: 2; number of reducers: 1
+2016-05-05 07:24:10,245 Stage-6 map = 0%,  reduce = 0%
+2016-05-05 07:24:17,455 Stage-6 map = 100%,  reduce = 0%, Cumulative CPU 2.92 sec
+2016-05-05 07:24:23,640 Stage-6 map = 100%,  reduce = 100%, Cumulative CPU 4.68 sec
+MapReduce Total cumulative CPU time: 4 seconds 680 msec
+Ended Job = job_1462424513485_0237
+Stage-15 is selected by condition resolver.
+Stage-1 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072424_bcd07584-6191-4e76-8973-3e688f4e5879.log
+2016-05-05 07:24:28	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:24:29	Processing rows:	200000	Hashtable size:	199999	Memory usage:	276798688	percentage:	0.297
+2016-05-05 07:24:30	Processing rows:	300000	Hashtable size:	299999	Memory usage:	212187704	percentage:	0.228
+2016-05-05 07:24:30	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-24-04_444_3801496746275872262-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable
+2016-05-05 07:24:30	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-24-04_444_3801496746275872262-1/-local-10009/HashTable-Stage-11/MapJoin-mapfile41--.hashtable (18083774 bytes)
+2016-05-05 07:24:30	End of local task; Time Taken: 2.767 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0238, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0238/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0238
+Hadoop job information for Stage-11: number of mappers: 1; number of reducers: 0
+2016-05-05 07:24:38,484 Stage-11 map = 0%,  reduce = 0%
+2016-05-05 07:24:45,671 Stage-11 map = 100%,  reduce = 0%, Cumulative CPU 2.41 sec
+MapReduce Total cumulative CPU time: 2 seconds 410 msec
+Ended Job = job_1462424513485_0238
+Stage-14 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072424_bcd07584-6191-4e76-8973-3e688f4e5879.log
+2016-05-05 07:24:50	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:24:51	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-24-04_444_3801496746275872262-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable
+2016-05-05 07:24:51	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-24-04_444_3801496746275872262-1/-local-10007/HashTable-Stage-9/MapJoin-mapfile31--.hashtable (276 bytes)
+2016-05-05 07:24:51	End of local task; Time Taken: 1.139 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0239, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0239/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0239
+Hadoop job information for Stage-9: number of mappers: 1; number of reducers: 0
+2016-05-05 07:24:57,522 Stage-9 map = 0%,  reduce = 0%
+2016-05-05 07:25:03,686 Stage-9 map = 100%,  reduce = 0%, Cumulative CPU 1.19 sec
+MapReduce Total cumulative CPU time: 1 seconds 190 msec
+Ended Job = job_1462424513485_0239
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072424_bcd07584-6191-4e76-8973-3e688f4e5879.log
+2016-05-05 07:25:08	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:25:09	Dump the side-table for tag: 1 with group count: 5 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-24-04_444_3801496746275872262-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable
+2016-05-05 07:25:09	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-24-04_444_3801496746275872262-1/-local-10005/HashTable-Stage-8/MapJoin-mapfile21--.hashtable (359 bytes)
+2016-05-05 07:25:09	End of local task; Time Taken: 1.201 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0240, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0240/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0240
+Hadoop job information for Stage-8: number of mappers: 1; number of reducers: 0
+2016-05-05 07:25:15,980 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:25:22,158 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 1.86 sec
+MapReduce Total cumulative CPU time: 1 seconds 860 msec
+Ended Job = job_1462424513485_0240
+Loading data to table default.temp_scores
+Table default.temp_scores stats: [numFiles=1, numRows=1, totalSize=22, rawDataSize=21]
+MapReduce Jobs Launched: 
+Stage-Stage-6: Map: 2  Reduce: 1   Cumulative CPU: 4.68 sec   HDFS Read: 938 HDFS Write: 114 SUCCESS
+Stage-Stage-11: Map: 1   Cumulative CPU: 2.41 sec   HDFS Read: 266 HDFS Write: 158 SUCCESS
+Stage-Stage-9: Map: 1   Cumulative CPU: 1.19 sec   HDFS Read: 595 HDFS Write: 158 SUCCESS
+Stage-Stage-8: Map: 1   Cumulative CPU: 1.86 sec   HDFS Read: 595 HDFS Write: 97 SUCCESS
+Total MapReduce CPU Time Spent: 10 seconds 140 msec
+OK
+Time taken: 78.863 seconds
+Warning: Map Join MAPJOIN[207][bigTable=?] in task 'Stage-15:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[44][tables = [current1, o, sq_1_notin_nullcheck]] in Stage 'Stage-6:MAPRED' is a cross product
+Query ID = hadoop_20160505072525_72921192-5a73-4477-8189-bde4251c767d
+Total jobs = 7
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072525_72921192-5a73-4477-8189-bde4251c767d.log
+2016-05-05 07:25:27	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:25:28	Dump the side-table for tag: 0 with group count: 0 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile70--.hashtable
+2016-05-05 07:25:28	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10011/HashTable-Stage-5/MapJoin-mapfile70--.hashtable (260 bytes)
+2016-05-05 07:25:28	End of local task; Time Taken: 1.413 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072525_72921192-5a73-4477-8189-bde4251c767d.log
+2016-05-05 07:25:33	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:25:34	Dump the side-table for tag: 0 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable
+2016-05-05 07:25:34	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10013/HashTable-Stage-18/MapJoin-mapfile80--.hashtable (279 bytes)
+2016-05-05 07:25:34	End of local task; Time Taken: 1.499 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072525_72921192-5a73-4477-8189-bde4251c767d.log
+2016-05-05 07:25:38	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:25:40	Dump the side-table for tag: 0 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile90--.hashtable
+2016-05-05 07:25:40	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10015/HashTable-Stage-19/MapJoin-mapfile90--.hashtable (284 bytes)
+2016-05-05 07:25:40	End of local task; Time Taken: 1.456 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 1 out of 7
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0241, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0241/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0241
+Hadoop job information for Stage-5: number of mappers: 3; number of reducers: 1
+2016-05-05 07:25:46,610 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:25:52,798 Stage-5 map = 33%,  reduce = 0%, Cumulative CPU 1.62 sec
+2016-05-05 07:25:53,828 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 5.44 sec
+2016-05-05 07:25:59,999 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 7.36 sec
+MapReduce Total cumulative CPU time: 7 seconds 360 msec
+Ended Job = job_1462424513485_0241
+Launching Job 2 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0242, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0242/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0242
+Hadoop job information for Stage-18: number of mappers: 1; number of reducers: 0
+2016-05-05 07:26:06,492 Stage-18 map = 0%,  reduce = 0%
+2016-05-05 07:26:13,684 Stage-18 map = 100%,  reduce = 0%, Cumulative CPU 2.67 sec
+MapReduce Total cumulative CPU time: 2 seconds 670 msec
+Ended Job = job_1462424513485_0242
+Launching Job 3 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0243, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0243/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0243
+Hadoop job information for Stage-19: number of mappers: 1; number of reducers: 0
+2016-05-05 07:26:21,116 Stage-19 map = 0%,  reduce = 0%
+2016-05-05 07:26:27,276 Stage-19 map = 100%,  reduce = 0%, Cumulative CPU 1.71 sec
+MapReduce Total cumulative CPU time: 1 seconds 710 msec
+Ended Job = job_1462424513485_0243
+Stage-21 is selected by condition resolver.
+Stage-6 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072525_72921192-5a73-4477-8189-bde4251c767d.log
+2016-05-05 07:26:32	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:26:34	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable
+2016-05-05 07:26:34	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10009/HashTable-Stage-15/MapJoin-mapfile61--.hashtable (276 bytes)
+2016-05-05 07:26:34	End of local task; Time Taken: 1.181 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0244, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0244/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0244
+Hadoop job information for Stage-15: number of mappers: 1; number of reducers: 0
+2016-05-05 07:26:40,237 Stage-15 map = 0%,  reduce = 0%
+2016-05-05 07:26:46,399 Stage-15 map = 100%,  reduce = 0%, Cumulative CPU 1.01 sec
+MapReduce Total cumulative CPU time: 1 seconds 10 msec
+Ended Job = job_1462424513485_0244
+Stage-20 is selected by condition resolver.
+Stage-2 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072525_72921192-5a73-4477-8189-bde4251c767d.log
+2016-05-05 07:26:50	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:26:52	Dump the side-table for tag: 1 with group count: 5 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable
+2016-05-05 07:26:52	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-25-23_313_6192815777667119903-1/-local-10007/HashTable-Stage-13/MapJoin-mapfile51--.hashtable (359 bytes)
+2016-05-05 07:26:52	End of local task; Time Taken: 1.245 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 7 out of 7
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0245, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0245/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0245
+Hadoop job information for Stage-13: number of mappers: 1; number of reducers: 0
+2016-05-05 07:26:58,410 Stage-13 map = 0%,  reduce = 0%
+2016-05-05 07:27:04,663 Stage-13 map = 100%,  reduce = 0%, Cumulative CPU 1.68 sec
+MapReduce Total cumulative CPU time: 1 seconds 680 msec
+Ended Job = job_1462424513485_0245
+Loading data to table default.came_from
+Table default.came_from stats: [numFiles=5, numRows=7, totalSize=48, rawDataSize=41]
+MapReduce Jobs Launched: 
+Stage-Stage-5: Map: 3  Reduce: 1   Cumulative CPU: 7.36 sec   HDFS Read: 1227 HDFS Write: 114 SUCCESS
+Stage-Stage-18: Map: 1   Cumulative CPU: 2.67 sec   HDFS Read: 15851484 HDFS Write: 140 SUCCESS
+Stage-Stage-19: Map: 1   Cumulative CPU: 1.71 sec   HDFS Read: 289 HDFS Write: 96 SUCCESS
+Stage-Stage-15: Map: 1   Cumulative CPU: 1.01 sec   HDFS Read: 577 HDFS Write: 140 SUCCESS
+Stage-Stage-13: Map: 1   Cumulative CPU: 1.68 sec   HDFS Read: 577 HDFS Write: 77 SUCCESS
+Total MapReduce CPU Time Spent: 14 seconds 430 msec
+OK
+Time taken: 102.493 seconds
+Warning: Map Join MAPJOIN[138][bigTable=?] in task 'Stage-14:MAPRED' is a cross product
+Warning: Shuffle Join JOIN[40][tables = [a, b, c, sq_1_notin_nullcheck]] in Stage 'Stage-3:MAPRED' is a cross product
+Warning: Map Join MAPJOIN[139][bigTable=?] in task 'Stage-16:MAPRED' is a cross product
+Query ID = hadoop_20160505072727_e0232c1f-c414-43d8-a171-734c3e14e00f
+Total jobs = 6
+Launching Job 1 out of 6
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0246, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0246/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0246
+Hadoop job information for Stage-8: number of mappers: 2; number of reducers: 1
+2016-05-05 07:27:11,919 Stage-8 map = 0%,  reduce = 0%
+2016-05-05 07:27:18,095 Stage-8 map = 100%,  reduce = 0%, Cumulative CPU 2.89 sec
+2016-05-05 07:27:25,307 Stage-8 map = 100%,  reduce = 100%, Cumulative CPU 4.67 sec
+MapReduce Total cumulative CPU time: 4 seconds 670 msec
+Ended Job = job_1462424513485_0246
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072727_e0232c1f-c414-43d8-a171-734c3e14e00f.log
+2016-05-05 07:27:29	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:27:31	Processing rows:	200000	Hashtable size:	199998	Memory usage:	257152360	percentage:	0.276
+2016-05-05 07:27:32	Processing rows:	300000	Hashtable size:	299998	Memory usage:	132669960	percentage:	0.142
+2016-05-05 07:27:32	Dump the side-table for tag: 1 with group count: 321270 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable
+2016-05-05 07:27:32	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile131--.hashtable (13124998 bytes)
+2016-05-05 07:27:32	Dump the side-table for tag: 2 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable
+2016-05-05 07:27:32	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile132--.hashtable (284 bytes)
+2016-05-05 07:27:32	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable
+2016-05-05 07:27:32	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10014/HashTable-Stage-17/MapJoin-mapfile141--.hashtable (279 bytes)
+2016-05-05 07:27:32	End of local task; Time Taken: 2.622 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 2 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0247, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0247/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0247
+Hadoop job information for Stage-17: number of mappers: 1; number of reducers: 0
+2016-05-05 07:27:39,479 Stage-17 map = 0%,  reduce = 0%
+2016-05-05 07:27:46,661 Stage-17 map = 100%,  reduce = 0%, Cumulative CPU 3.32 sec
+MapReduce Total cumulative CPU time: 3 seconds 320 msec
+Ended Job = job_1462424513485_0247
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072727_e0232c1f-c414-43d8-a171-734c3e14e00f.log
+2016-05-05 07:27:52	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:27:54	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable
+2016-05-05 07:27:54	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10012/HashTable-Stage-16/MapJoin-mapfile121--.hashtable (8928107 bytes)
+2016-05-05 07:27:54	End of local task; Time Taken: 2.227 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 3 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0248, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0248/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0248
+Hadoop job information for Stage-16: number of mappers: 1; number of reducers: 0
+2016-05-05 07:28:01,419 Stage-16 map = 0%,  reduce = 0%
+2016-05-05 07:28:08,618 Stage-16 map = 100%,  reduce = 0%, Cumulative CPU 3.42 sec
+MapReduce Total cumulative CPU time: 3 seconds 420 msec
+Ended Job = job_1462424513485_0248
+Stage-20 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072727_e0232c1f-c414-43d8-a171-734c3e14e00f.log
+2016-05-05 07:28:13	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:28:14	Dump the side-table for tag: 1 with group count: 1 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable
+2016-05-05 07:28:14	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10010/HashTable-Stage-14/MapJoin-mapfile111--.hashtable (276 bytes)
+2016-05-05 07:28:14	End of local task; Time Taken: 1.226 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 5 out of 6
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1462424513485_0249, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0249/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0249
+Hadoop job information for Stage-14: number of mappers: 1; number of reducers: 0
+2016-05-05 07:28:21,087 Stage-14 map = 0%,  reduce = 0%
+2016-05-05 07:28:27,252 Stage-14 map = 100%,  reduce = 0%, Cumulative CPU 1.21 sec
+MapReduce Total cumulative CPU time: 1 seconds 210 msec
+Ended Job = job_1462424513485_0249
+Execution log at: /mnt/tmp/hadoop/hadoop_20160505072727_e0232c1f-c414-43d8-a171-734c3e14e00f.log
+2016-05-05 07:28:31	Starting to launch local task to process map join;	maximum memory = 932184064
+2016-05-05 07:28:33	Dump the side-table for tag: 1 with group count: 5 into file: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable
+2016-05-05 07:28:33	Uploaded 1 File to: file:/mnt/tmp/hadoop/b0c1479d-096f-4233-8422-d859f19f3ce2/hive_2016-05-05_07-27-05_811_8767149969700753547-1/-local-10008/HashTable-Stage-5/MapJoin-mapfile101--.hashtable (359 bytes)
+2016-05-05 07:28:33	End of local task; Time Taken: 1.244 sec.
+Execution completed successfully
+MapredLocal task succeeded
+Launching Job 6 out of 6
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0250, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0250/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0250
+Hadoop job information for Stage-5: number of mappers: 1; number of reducers: 1
+2016-05-05 07:28:39,693 Stage-5 map = 0%,  reduce = 0%
+2016-05-05 07:28:45,863 Stage-5 map = 100%,  reduce = 0%, Cumulative CPU 1.61 sec
+2016-05-05 07:28:53,060 Stage-5 map = 100%,  reduce = 100%, Cumulative CPU 3.52 sec
+MapReduce Total cumulative CPU time: 3 seconds 520 msec
+Ended Job = job_1462424513485_0250
+Loading data to table default.open
+Table default.open stats: [numFiles=2, numRows=3, totalSize=68, rawDataSize=65]
+MapReduce Jobs Launched: 
+Stage-Stage-8: Map: 2  Reduce: 1   Cumulative CPU: 4.67 sec   HDFS Read: 938 HDFS Write: 114 SUCCESS
+Stage-Stage-17: Map: 1   Cumulative CPU: 3.32 sec   HDFS Read: 15851484 HDFS Write: 172 SUCCESS
+Stage-Stage-16: Map: 1   Cumulative CPU: 3.42 sec   HDFS Read: 609 HDFS Write: 208 SUCCESS
+Stage-Stage-14: Map: 1   Cumulative CPU: 1.21 sec   HDFS Read: 645 HDFS Write: 204 SUCCESS
+Stage-Stage-5: Map: 1  Reduce: 1   Cumulative CPU: 3.52 sec   HDFS Read: 641 HDFS Write: 90 SUCCESS
+Total MapReduce CPU Time Spent: 16 seconds 140 msec
+OK
+Time taken: 108.387 seconds
+Query ID = hadoop_20160505072828_0ee757b5-1afb-4e69-a043-71a08039e04d
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0251, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0251/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0251
+Hadoop job information for Stage-1: number of mappers: 2; number of reducers: 1
+2016-05-05 07:29:00,843 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:29:07,001 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.06 sec
+2016-05-05 07:29:14,199 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.98 sec
+MapReduce Total cumulative CPU time: 3 seconds 980 msec
+Ended Job = job_1462424513485_0251
+Loading data to table default.open
+Table default.open stats: [numFiles=1, numRows=3, totalSize=68, rawDataSize=65]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 2  Reduce: 1   Cumulative CPU: 3.98 sec   HDFS Read: 561 HDFS Write: 136 SUCCESS
+Total MapReduce CPU Time Spent: 3 seconds 980 msec
+OK
+Time taken: 21.16 seconds
+Query ID = hadoop_20160505072929_c1fc335f-f07b-4774-8c18-2d77cd20462b
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Job = job_1462424513485_0252, Tracking URL = http://ip-172-31-30-118.us-west-2.compute.internal:20888/proxy/application_1462424513485_0252/
+Kill Command = /usr/lib/hadoop/bin/hadoop job  -kill job_1462424513485_0252
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
+2016-05-05 07:29:20,959 Stage-1 map = 0%,  reduce = 0%
+2016-05-05 07:29:27,115 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.08 sec
+2016-05-05 07:29:34,305 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 2.39 sec
+MapReduce Total cumulative CPU time: 2 seconds 390 msec
+Ended Job = job_1462424513485_0252
+Loading data to table default.current1
+Table default.current1 stats: [numFiles=1, numRows=1, totalSize=22, rawDataSize=21]
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 2.39 sec   HDFS Read: 311 HDFS Write: 94 SUCCESS
+Total MapReduce CPU Time Spent: 2 seconds 390 msec
+OK
+Time taken: 20.088 seconds
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 0.878 seconds, Fetched: 1 row(s)
+[hadoop@ip-172-31-30-118 ~]$ current=$stop
+[hadoop@ip-172-31-30-118 ~]$ echo $current >> final_path.txt
+[hadoop@ip-172-31-30-118 ~]$ while [[ current -ne $start ]]; 
+> do
+> current=$(hive -e "select node_from from came_from where node=$current;") 
+> echo $current >> final_path.txt
+> done
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.372 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.352 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.287 seconds, Fetched: 1 row(s)
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+OK
+Time taken: 1.313 seconds, Fetched: 1 row(s)
+[hadoop@ip-172-31-30-118 ~]$ cat final_path.txt
+4
+3
+309
+308
+1
+[hadoop@ip-172-31-30-118 ~]$ cat current.txtx
+cat: current.txtx: No such file or directory
+[hadoop@ip-172-31-30-118 ~]$ cat current.txt
+Start time 06:44:17
+Start Iteration 1
+06:47:43
+Start time 06:48:35
+Start Iteration 1
+06:55:14
+Current Node 1
+End Iteration 1
+07:02:06
+Start Iteration 2
+07:02:11
+Current Node 2
+End Iteration 2
+07:08:59
+Start Iteration 3
+07:09:04
+Current Node 308
+End Iteration 3
+07:15:49
+Start Iteration 4
+07:15:54
+Current Node 309
+End Iteration 4
+07:22:41
+Start Iteration 5
+07:22:47
+Current Node 3
+End Iteration 5
+07:29:35
+[hadoop@ip-172-31-30-118 ~]$ hadoop fs -put final_path.txt s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/
+16/05/05 08:07:23 INFO fs.EmrFileSystem: Consistency disabled, using com.amazon.ws.emr.hadoop.fs.s3n.S3NativeFileSystem as filesystem implementation
+16/05/05 08:07:25 INFO s3n.MultipartUploadOutputStream: close closed:false s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/final_path.txt
+16/05/05 08:07:25 INFO s3n.Jets3tNativeFileSystemStore: s3.putObject aws-logs-022898790140-us-west-2 elasticmapreduce/j-1PF490LZP2KQ5/data/final_path.txt 14
+16/05/05 08:07:25 INFO s3n.MultipartUploadOutputStream: close closed:true s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/final_path.txt
+[hadoop@ip-172-31-30-118 ~]$ hadoop fs -put current.txt s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/
+16/05/05 08:09:17 INFO fs.EmrFileSystem: Consistency disabled, using com.amazon.ws.emr.hadoop.fs.s3n.S3NativeFileSystem as filesystem implementation
+16/05/05 08:09:18 INFO s3n.MultipartUploadOutputStream: close closed:false s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/current.txt
+16/05/05 08:09:18 INFO s3n.Jets3tNativeFileSystemStore: s3.putObject aws-logs-022898790140-us-west-2 elasticmapreduce/j-1PF490LZP2KQ5/data/current.txt 406
+16/05/05 08:09:18 INFO s3n.MultipartUploadOutputStream: close closed:true s3://aws-logs-022898790140-us-west-2/elasticmapreduce/j-1PF490LZP2KQ5/data/current.txt
+[hadoop@ip-172-31-30-118 ~]$ 
